@@ -1,0 +1,4 @@
+---
+#- name: Reboot
+#  action: command /sbin/shutdown -r +5 "Reboot is triggered by Ansible"
+#  action: command /sbin/reboot "Reboot is triggered by Ansible"

@@ -1,0 +1,6 @@
+---
+- hosts: oseusers
+  user: root
+
+  roles:
+    - oseusers

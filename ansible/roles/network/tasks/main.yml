@@ -1,0 +1,24 @@
+---
+- name: Setup networking interfaces
+  action: template owner=root group=root mode=644 src=etc/sysconfig/network-scripts/ifcfg-enp0s8 dest=/etc/sysconfig/network-scripts/ifcfg-enp0s8
+
+- name: Chattr -i /etc/resolv.conf
+  action: command chattr -i /etc/resolv.conf 
+
+- name: Setup hosts
+  action: template owner=root group=root mode=644 src=etc/hosts dest=/etc/hosts
+
+- name: Setup DNS
+  action: template owner=root group=root mode=644 src=etc/resolv.conf dest=/etc/resolv.conf
+
+
+#- name: Disable network manager
+#  tags: networking
+#  service: name=NetworkManager state=stopped enabled=no
+
+- name: Chattr +i /etc/resolv.conf
+  action: command chattr +i /etc/resolv.conf
+
+- name: Stop firewalld
+  tags: networking
+  service: name=firewalld state=stopped enabled=no

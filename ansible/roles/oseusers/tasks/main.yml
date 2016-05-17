@@ -1,0 +1,16 @@
+
+---
+
+#- name: python-passlib needed for ansible plugin
+#  yum:
+#    name: python-passlib
+#    state: latest
+#  tags: [python-passlib]
+
+# need to add epel, switching to commande ligne
+
+#- name: Add user for the demo
+#  htpasswd: path=/etc/origin/master/htpasswd name=gabriel password=gabriel
+
+  - name: Add users
+    action: command htpasswd -b -c /etc/origin/master/htpasswd gabriel gabriel

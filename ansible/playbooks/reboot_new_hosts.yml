@@ -1,0 +1,7 @@
+---
+- hosts: new-servers
+  user: root
+  gather_facts: false
+
+  tasks:
+    - include: tasks/reboot.yml

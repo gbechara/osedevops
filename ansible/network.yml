@@ -1,0 +1,16 @@
+---
+#- include: playbooks/reboot_new_hosts.yml
+
+- hosts: new-servers
+  user: root
+
+  roles:
+    - network
+    - subscriptions
+    - docker
+
+- hosts: dns-servers
+  user: root
+
+  roles:
+    - dnsmasq
