@@ -1,0 +1,12 @@
+---
+- hosts: registry
+  user: root
+
+  roles:
+  - registry
+
+- hosts: router
+  user: root
+
+  roles:
+  - router

@@ -7,6 +7,10 @@
   tags: networking
   service: name=dnsmasq state=started enabled=yes
 
+- name: Setup DNS
+  action: template owner=root group=root mode=644 src=etc/resolv.conf.upstream dest=/etc/resolv.conf.upstream
+
+
 - name: Resart dnsmasq
   tags: networking
   service: name=dnsmasq state=restarted 

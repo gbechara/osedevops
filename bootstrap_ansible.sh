@@ -17,11 +17,12 @@ yum install atomic-openshift-utils -y
 #yum install docker-1.9.1 -y
 #chkconfig NetworkManager off
 #service NetworkManager stop
-#echo 'nameserver 10.100.192.201' >> /etc/resolv.conf
-#nmcli connection modify enp0s3 +ipv4.dns 10.100.192.201
 
-#echo 'DNS1="10.100.192.201"' >> /etc/sysconfig/network-scripts/ifcfg-enp0s3
+#nmcli connection modify enp0s3 +ipv4.dns 10.100.192.201
+#nmcli connection modify  enp0s3 +ipv4.dns-search 'example.com'
+#nmcli connection modify  enp0s3 ipv4.ignore-auto-dns true
 #service NetworkManager restart
+
 
 #mkdir -p /etc/ansible 
 #touch /etc/ansible/hosts
