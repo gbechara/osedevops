@@ -10,8 +10,6 @@ ansible_ssh_user=root
 
 # If ansible_ssh_user is not root, ansible_sudo must be set to true
 #ansible_sudo=true
-#openshift_ip=10.100.192.200
-#openshift_public_ip=10.100.192.200
 
 deployment_type=openshift-enterprise
 
@@ -24,5 +22,5 @@ ose-master.example.com
 
 # host group for nodes, includes region info
 [nodes]
-ose-master.example.com openshift_node_labels="{'region': 'master', 'zone': 'default'}"
-ose-node-1.example.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}"
+ose-master.example.com openshift_node_labels="{'region': 'master', 'zone': 'default'}" openshift_ip=10.100.192.200
+ose-node-1.example.com openshift_node_labels="{'region': 'primary', 'zone': 'east'}" openshift_ip=10.100.192.202
