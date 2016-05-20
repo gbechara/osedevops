@@ -5,7 +5,7 @@ set -e
 echo "Launch ansible-playbook"
 
 ssh-keygen -t rsa -f ~/.ssh/id_rsa -N '' 
-echo weareawesome > password.txt
+
 for host in 10.100.192.200 \
     10.100.192.201 \
     10.100.192.202; \
