@@ -1,8 +1,5 @@
 ---
 
-- name: Master to be schedulable
-  action: command oadm manage-node ose-master.example.com --schedulable=true
-
 - name: Create router on master
   action: command oadm router router --replicas=1 --config=/etc/origin/master/admin.kubeconfig \
           --images='registry.access.redhat.com/openshift3/ose-${component}:${version}' \
