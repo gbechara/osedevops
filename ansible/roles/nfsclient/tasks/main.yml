@@ -2,14 +2,23 @@
 
 - name: Install NFS Client utils
   yum: name=nfs-utils state=latest
-  tags: [nfs-server]
+  tags: [nfs-client]
 
 - name: Install NFS Client rcp-bind
   yum: name=rpcbind state=latest
-  tags: [nfs-server]
+  tags: [nfs-client]
 
 
 - name: Enable NFS Client
   service: name=rpcbind state=started enabled=yes
-  tags: [nfs-server]
+  tags: [nfs-client]
 
+# setsebool -P virt_use_nfs 1
+- name: Confiture SELinux NFS Client
+  selinux: policy=virt_use_nfs state=enforcing
+  tags: [nfs-client]
+
+# setsebool -P virt_sandbox_use_nfs 1
+- name: Confiture SELinux NFS Client
+  selinux: policy=virt_sandbox_use_nfs state=enforcing
+  tags: [nfs-client]

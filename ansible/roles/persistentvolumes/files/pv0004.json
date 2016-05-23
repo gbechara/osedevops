@@ -8,7 +8,7 @@
     "capacity": {
         "storage": "1Gi"
     },
-    "accessModes": [ "ReadWriteMany" ],
+    "accessModes": [ "ReadWriteOnce" ],
     "nfs": {
         "path": "/opt/nfs/pv0004",
         "server": "10.100.192.201"
