@@ -1,0 +1,15 @@
+---
+
+- name: Install NFS Client utils
+  yum: name=nfs-utils state=latest
+  tags: [nfs-server]
+
+- name: Install NFS Client rcp-bind
+  yum: name=rpcbind state=latest
+  tags: [nfs-server]
+
+
+- name: Enable NFS Client
+  service: name=rpcbind state=started enabled=yes
+  tags: [nfs-server]
+

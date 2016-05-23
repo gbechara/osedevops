@@ -48,6 +48,10 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
   config.vm.define "ose-master" do |d|
       d.vm.provision :shell, path: "launch_ansible.sh"
   end

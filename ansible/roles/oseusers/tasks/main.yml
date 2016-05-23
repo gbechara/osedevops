@@ -12,5 +12,11 @@
 #- name: Add user for the demo
 #  htpasswd: path=/etc/origin/master/htpasswd name=gabriel password=gabriel
 
-  - name: Add users
+  - name: Add first users
     action: command htpasswd -b -c /etc/origin/master/htpasswd gabriel gabriel
+
+
+  - name: Add additinal users
+    action: command htpasswd -b /etc/origin/master/htpasswd {{item}} {{item}}
+    with_items:
+    - 'demo1'

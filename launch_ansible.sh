@@ -14,7 +14,8 @@ for host in 10.100.192.200 \
 
 #sshpass -p "weareawesome"  ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub 10.100.192.200
 
-ansible-playbook /vagrant/ansible/network.yml -i /vagrant/ansible/allhosts
+# prepare the machines
+ansible-playbook /vagrant/ansible/oseprerequesites.yml -i /vagrant/ansible/hosts
 
 for host in ose-master.example.com \
     ose-infra.example.com \
@@ -22,6 +23,10 @@ for host in ose-master.example.com \
     do sshpass -p "weareawesome" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub $host; \
     done
 
+# call ose installer
 ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml -i /vagrant/ansible/osehosts
-ansible-playbook /vagrant/ansible/oseusers.yml -i /vagrant/ansible/oseusershost
-ansible-playbook /vagrant/ansible/oseadditionalconf.yml -i /vagrant/ansible/oseadditionalconfhosts
+
+# add users
+ansible-playbook /vagrant/ansible/oseusers.yml -i /vagrant/ansible/hosts
+# finish set up
+ansible-playbook /vagrant/ansible/oseadditionalconf.yml -i /vagrant/ansible/hosts

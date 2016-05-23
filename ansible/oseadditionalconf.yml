@@ -1,12 +1,16 @@
 ---
-- hosts: registry
+
+- hosts: nodes
+  user: root
+
+  roles:
+  - nfsclient
+
+
+- hosts: master
   user: root
 
   roles:
   - registry
-
-- hosts: router
-  user: root
-
-  roles:
   - router
+  - persistentvolumes

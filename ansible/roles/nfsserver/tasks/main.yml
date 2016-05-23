@@ -1,0 +1,37 @@
+---
+
+- name: Install NFS Server utils
+  yum: name=nfs-utils state=latest
+  tags: [nfs-server]
+
+- name: Install NFS Server rcp-bind
+  yum: name=rpcbind state=latest
+  tags: [nfs-server]
+
+- name: Create a directory for NFS
+  file: path=/opt/nfs state=directory owner=nfsnobody group=nfsnobody mode=0775
+  tags: [nfs-server]
+
+- name: Create sub directories for NFS
+  file: path=/opt/nfs/pv{{item}} state=directory owner=nfsnobody group=nfsnobody mode=0775
+  with_items:
+  - '0001'
+  - '0002'
+  - '0003'
+  - '0004'
+  - '0005'
+  tags: [nfs-server]
+
+- name: Setup NFS Server config
+  action: template owner=root group=root mode=644 src=etc/exports dest=/etc/exports
+  tags: [nfs-server]
+
+
+- name: Enable NFS Server
+  service: name=rpcbind state=started enabled=yes
+  tags: [nfs-server]
+
+
+- name: Enable NFS Server
+  service: name=nfs-server state=started enabled=yes
+  tags: [nfs-server]

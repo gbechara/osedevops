@@ -14,3 +14,10 @@
 
   roles:
     - dnsmasq
+
+- hosts: nfs-servers
+  user: root
+
+  roles:
+    - nfsserver
+
