@@ -2,15 +2,15 @@
 
 - name: Install NFS Server utils
   yum: name=nfs-utils state=latest
-  tags: [nfs-server]
+  tags: nfs-server
 
 - name: Install NFS Server rcp-bind
   yum: name=rpcbind state=latest
-  tags: [nfs-server]
+  tags: nfs-server
 
 - name: Create a directory for NFS
   file: path=/opt/nfs state=directory owner=nfsnobody group=nfsnobody mode=0775
-  tags: [nfs-server]
+  tags: nfs-server
 
 - name: Create sub directories for NFS
   file: path=/opt/nfs/pv{{item}} state=directory owner=nfsnobody group=nfsnobody mode=0775
@@ -20,23 +20,23 @@
   - '0003'
   - '0004'
   - '0005'
-  tags: [nfs-server]
+  tags: nfs-server
 
 - name: Setup NFS Server config
   action: template owner=root group=root mode=644 src=etc/exports dest=/etc/exports
-  tags: [nfs-server]
+  tags: nfs-server
 
 
 - name: Enable NFS Server
   service: name=rpcbind state=started enabled=yes
-  tags: [nfs-server]
+  tags: nfs-server
 
 
 - name: Enable NFS Server
   service: name=nfs-server state=started enabled=yes
-  tags: [nfs-server]
+  tags: nfs-server
 
 #iptables -I INPUT 1 -p tcp --dport 2049 -j ACCEPT
 #- name: Configure IPTables for NFSv4 Server
 #  iptables: chain=INPUT protocol=tcp destination_port=2049 jump=ACCEPT
-#  tags: [nfs-server]
+#  tags: nfs-server

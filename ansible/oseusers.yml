@@ -1,5 +1,5 @@
 ---
-- hosts: oseusers
+- hosts: users
   user: root
 
   roles:

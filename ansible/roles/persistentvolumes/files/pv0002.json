@@ -8,7 +8,7 @@
     "capacity": {
         "storage": "512Mi"
     },
-    "accessModes": [ "ReadWriteOnce" ],
+    "accessModes": [ "ReadWriteOnce", "ReadWriteMany" ],
     "nfs": {
         "path": "/opt/nfs/pv0002",
         "server": "10.100.192.201"

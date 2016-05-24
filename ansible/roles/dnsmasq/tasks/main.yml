@@ -1,16 +1,16 @@
 ---
 - name: Setup dnsmasq config
   action: template owner=root group=root mode=644 src=etc/dnsmasq.conf dest=/etc/dnsmasq.conf
-
+  tags: networking
 
 - name: Enable dnsmasq
-  tags: networking
   service: name=dnsmasq state=started enabled=yes
+  tags: networking
 
 - name: Setup DNS
   action: template owner=root group=root mode=644 src=etc/resolv.conf.upstream dest=/etc/resolv.conf.upstream
-
+  tags: networking
 
 - name: Resart dnsmasq
+  service: name=dnsmasq state=restarted
   tags: networking
-  service: name=dnsmasq state=restarted 

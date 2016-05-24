@@ -1,0 +1,67 @@
+---
+#- name: Start nexus data file
+#  action: command docker run --detach \
+#          --name nexus-data \
+#          --restart always \
+#          sonatype/nexus
+#  tags: nexus
+
+- name: Create files for GitLab
+  file: path=/srv/nexus-data state=directory
+  tags: nexus
+
+
+- name: Start nexus
+  action: command docker run --detach \
+          --hostname nexus.example.com \
+          --publish 8081:8081 \
+          --name nexus \
+          --restart always \
+          --volume /srv/nexus-data:/sonatype-work:Z \
+          --user root \
+          sonatype/nexus
+  tags: nexus
+  ignore_errors: yes
+
+#
+# SE Linux : Z options avaiable only in Ansible 2.1, OSE Ansible version is 1.9.4
+#
+#- name: Add adequate EPEL repos
+#  action: command wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#
+#- name: Add adequate EPEL repos
+#  action: command rpm -Uvh epel-release-latest-7*.rpm
+#  ignore_errors: yes
+#
+#- name: Workaround for Ansible issue adding epel
+#  yum: name=epel-release state=latest
+#
+#- name: Workaround for Ansible issue adding docker python
+#  yum: name=docker-python state=latest
+#
+#- name: Workaround for Ansible issue - make sure pip is installed
+#  yum: name=python-pip state=latest
+#
+#- name: Workaround for Ansible issue - make sure required PyPi packages are installed
+#  pip: name={{ item }} state=present
+#  with_items:
+#    - docker-py==1.2.3
+#    - six>=1.4.0
+#
+# SE Linux : Z options avaiable only in Ansible 2.1, OSE Ansible version is 1.9.4
+#
+#- name: Start Git Lab docker container
+#  docker:
+#    name: gitlab
+#    image: gitlab/gitlab-ce:latest
+#    hostname: gitlab.example.com
+#    ports:
+#      - 443:443
+#      - 80:80
+#      - 2222:22
+#    restart_policy: always
+#    volumes:
+#      - /srv/gitlab/config:/etc/gitlab:Z
+#      - /srv/gitlab/logs:/var/log/gitlab:Z
+#      - /srv/gitlab/data:/var/opt/gitlab:Z
+#  tags: gitlab

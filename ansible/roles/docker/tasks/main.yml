@@ -1,21 +1,15 @@
 
 - name: Docker is present
-  yum:
-    name: docker-1.9.1
-    state: latest
-  tags: [docker]
+  yum: name=docker-1.9.1 state=latest
+  tags: docker
 
 
 - name: Configurations are present
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+  copy: src="{{ item.src }}" dest="{{ item.dest }}"
   with_items:
     - { src: "docker", dest: "/etc/sysconfig/docker" }
-  tags: [docker]
+  tags: docker
 
 - name: Docker service is restarted
-  service:
-    name: docker
-    state: restarted
-  tags: [docker]
+  service: name=docker state=restarted
+  tags: docker

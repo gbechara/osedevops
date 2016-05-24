@@ -4,4 +4,4 @@
   action: command  oc create -f "{{ item }}"
   with_fileglob:
   - pv*.json
-  tags: [persistent-volumes]
+  tags: persistent-volumes

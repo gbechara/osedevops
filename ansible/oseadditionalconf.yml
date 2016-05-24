@@ -1,5 +1,11 @@
 ---
 
+- hosts: infra
+  user: root
+  roles:
+  - gitlab
+  - nexus
+
 - hosts: nodes
   user: root
 
@@ -14,3 +20,4 @@
   - registry
   - router
   - persistentvolumes
+
