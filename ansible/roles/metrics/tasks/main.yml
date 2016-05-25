@@ -9,12 +9,12 @@
 
 - name: Grant edit permission on project openshift-infra for the service account metric-deployer
   action: command oadm policy add-role-to-user \
-          edit system:serviceaccount:openshift-infra:metrics-deployer
+          edit system:serviceaccount:openshift-infra:metrics-deployer -n openshift-infra
   tags: hawkular-metrics
 
 - name: Grant Heapster service account the cluster-reader permission to read the stats
   action: command oadm policy add-cluster-role-to-user \
-          cluster-reader system:serviceaccount:openshift-infra:heapster
+          cluster-reader system:serviceaccount:openshift-infra:heapster -n openshift-infra
   tags: hawkular-metrics
 
 - name: Create a "dummy" secret that does not specify a certificate value for the metrics deployer
