@@ -28,5 +28,5 @@
 
 - name: Process the metrics deployer
   shell: command oc process -f  metrics-deployer.yaml -v \
-          HAWKULAR_METRICS_HOSTNAME=hawkular-metrics.example.com,USE_PERSISTENT_STORAGE=false -n openshift-infra | oc create -f -
+          HAWKULAR_METRICS_HOSTNAME=hawkular-metrics.example.com,USE_PERSISTENT_STORAGE=false  | oc create -n openshift-infra -f -
   tags: hawkular-metrics
