@@ -20,4 +20,5 @@
   - registry
   - router
   - persistentvolumes
+  - metrics
 

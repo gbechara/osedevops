@@ -1,0 +1,32 @@
+---
+- name: Copy the metrics service account definition
+  copy: src="metrics-service-account.yaml" dest="."
+  tags: hawkular-metrics
+
+- name: Create service account for metrics deployer
+  action: command oc create -n openshift-infra -f metrics-service-account.yaml
+  tags: hawkular-metrics
+
+- name: Grant edit permission on project openshift-infra for the service account metric-deployer
+  action: command oadm policy add-role-to-user \
+          edit system:serviceaccount:openshift-infra:metrics-deployer
+  tags: hawkular-metrics
+
+- name: Grant Heapster service account the cluster-reader permission to read the stats
+  action: command oadm policy add-cluster-role-to-user \
+          cluster-reader system:serviceaccount:openshift-infra:heapster
+  tags: hawkular-metrics
+
+- name: Create a "dummy" secret that does not specify a certificate value for the metrics deployer
+  action: command oc secrets new metrics-deployer nothing=/dev/null
+  tags: hawkular-metrics
+
+# Should replace this copy by a copy from /usr/share/openshift/examples/infrastructure-templates/enterprise/metrics-deployer.yaml
+- name: Copy the metric deployer template
+  copy: src="metrics-deployer.yaml" dest="."
+  tags: hawkular-metrics
+
+- name: Process the metrics deployer
+  shell: command oc process -f  metrics-deployer.yaml -v \
+          HAWKULAR_METRICS_HOSTNAME=hawkular-metrics.example.com,USE_PERSISTENT_STORAGE=false -n openshift-infra | oc create -f -
+  tags: hawkular-metrics

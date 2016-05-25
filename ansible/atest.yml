@@ -1,0 +1,8 @@
+---
+
+- hosts: master
+  user: root
+
+  roles:
+  - metrics
+
