@@ -18,7 +18,7 @@
   tags: hawkular-metrics
 
 - name: Create a "dummy" secret that does not specify a certificate value for the metrics deployer
-  action: command oc secrets new metrics-deployer nothing=/dev/null
+  action: command oc secrets new metrics-deployer nothing=/dev/null -n openshift-infra
   tags: hawkular-metrics
 
 # Should replace this copy by a copy from /usr/share/openshift/examples/infrastructure-templates/enterprise/metrics-deployer.yaml
