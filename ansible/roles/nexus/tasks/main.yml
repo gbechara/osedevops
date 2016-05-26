@@ -23,6 +23,18 @@
   tags: nexus
   ignore_errors: yes
 
+- name: Nexus config
+  copy: src="nexus.xml" dest="/srv/nexus-data/conf/"
+  tags: nexus
+
+- name: Restart nexus
+  action: command chcon -v --type=svirt_sandbox_file_t /srv/nexus-data/conf/nexus.xml
+  tags: nexus
+
+- name: Restart nexus
+  action: command docker restart nexus
+  tags: nexus
+
 #
 # SE Linux : Z options avaiable only in Ansible 2.1, OSE Ansible version is 1.9.4
 #
