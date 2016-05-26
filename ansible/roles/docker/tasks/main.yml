@@ -11,5 +11,5 @@
   tags: docker
 
 - name: Docker service is restarted
-  service: name=docker state=restarted
+  service: name=docker state=restarted enabled=yes
   tags: docker
