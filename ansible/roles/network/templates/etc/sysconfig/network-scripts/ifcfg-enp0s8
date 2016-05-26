@@ -1,6 +1,9 @@
 TYPE="Ethernet"
-BOOTPROTO="dhcp"
+BOOTPROTO="none"
 DEFROUTE="yes"
+NETWORK=10.100.192.0
+NETMASK=255.255.255.0
+IPADDR={{ inventory_hostname }}
 PEERDNS="yes"
 PEERROUTES="yes"
 IPV4_FAILURE_FATAL="no"
