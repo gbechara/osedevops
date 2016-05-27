@@ -16,7 +16,7 @@ Vagrant.configure(2) do |config|
     d.vm.provider "virtualbox" do |v|
       v.memory = 2048
     end
-    config.vm.provider :virtualbox do |vb|
+    config.vm.provider :"virtualbox" do |vb|
       vb.gui = true
     end
   end
@@ -40,12 +40,12 @@ Vagrant.configure(2) do |config|
         v.memory = 4096
       end
       d.vm.provision :shell, path: "bootstrap_ansible.sh"
-      config.vm.provider "virtualbox" do |v| 
-        v.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
+#      config.vm.provider "virtualbox" do |v|
+#        v.customize ["modifyvm", :id, "--natdnshostresolver1", "off"]
+#      end
+      config.vm.provider :"virtualbox" do |vb|
+        vb.gui = true
       end
-      config.vm.provider :virtualbox do |vb|
-      vb.gui = true
-    end
   end
 
   if Vagrant.has_plugin?("vagrant-cachier")

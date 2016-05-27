@@ -100,7 +100,7 @@
         <url>https://nexus.codehaus.org/snapshots/</url>
       </remoteStorage>
       <externalConfiguration>
-        <proxyMode>ALLOW</proxyMode>
+        <proxyMode>BLOCKED_AUTO</proxyMode>
         <artifactMaxAge>1440</artifactMaxAge>
         <itemMaxAge>1440</itemMaxAge>
         <cleanseRepositoryMetadata>false</cleanseRepositoryMetadata>
@@ -260,6 +260,7 @@
         <metadataMaxAge>1440</metadataMaxAge>
         <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
+        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
@@ -291,6 +292,7 @@
         <metadataMaxAge>1440</metadataMaxAge>
         <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
+        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
@@ -322,6 +324,7 @@
         <metadataMaxAge>1440</metadataMaxAge>
         <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
+        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
@@ -353,6 +356,7 @@
         <metadataMaxAge>1440</metadataMaxAge>
         <itemMaxAge>1440</itemMaxAge>
         <autoBlockActive>true</autoBlockActive>
+        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
     <repository>
@@ -372,11 +376,42 @@
       </localStorage>
       <externalConfiguration>
         <memberRepositories>
-          <memberRepository>jboss-community-repository</memberRepository>
           <memberRepository>jboss-developer-staging-repository</memberRepository>
-          <memberRepository>jboss-earlyaccess-repository</memberRepository>
-          <memberRepository>redhat-ga-repository</memberRepository>
+          <memberRepository>jboss-enterprise-maven-repository</memberRepository>
+          <memberRepository>central</memberRepository>
         </memberRepositories>
+      </externalConfiguration>
+    </repository>
+    <repository>
+      <id>jboss-enterprise-maven-repository</id>
+      <name>jboss-enterprise-maven-repository</name>
+      <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
+      <providerHint>maven2</providerHint>
+      <localStatus>IN_SERVICE</localStatus>
+      <notFoundCacheActive>true</notFoundCacheActive>
+      <notFoundCacheTTL>1440</notFoundCacheTTL>
+      <userManaged>true</userManaged>
+      <exposed>true</exposed>
+      <browseable>true</browseable>
+      <writePolicy>READ_ONLY</writePolicy>
+      <indexable>true</indexable>
+      <searchable>true</searchable>
+      <localStorage>
+        <provider>file</provider>
+      </localStorage>
+      <remoteStorage>
+        <url>https://maven.repository.redhat.com/ga/</url>
+      </remoteStorage>
+      <externalConfiguration>
+        <repositoryPolicy>RELEASE</repositoryPolicy>
+        <checksumPolicy>WARN</checksumPolicy>
+        <fileTypeValidation>true</fileTypeValidation>
+        <downloadRemoteIndex>true</downloadRemoteIndex>
+        <artifactMaxAge>-1</artifactMaxAge>
+        <metadataMaxAge>1440</metadataMaxAge>
+        <itemMaxAge>1440</itemMaxAge>
+        <autoBlockActive>true</autoBlockActive>
+        <proxyMode>ALLOW</proxyMode>
       </externalConfiguration>
     </repository>
   </repositories>
@@ -482,11 +517,35 @@
       </patterns>
     </repositoryTarget>
   </repositoryTargets>
+  <tasks>
+    <task>
+      <id>4</id>
+      <name>Health Check: jboss-enterprise-maven-repository</name>
+      <enabled>true</enabled>
+      <type>HealthCheckTask</type>
+      <status>WAITING</status>
+      <nextRun>1464455378551</nextRun>
+      <schedule>
+        <type>hourly</type>
+        <startDate>1464455378551</startDate>
+      </schedule>
+      <properties>
+        <property>
+          <key>repoId</key>
+          <value>jboss-enterprise-maven-repository</value>
+        </property>
+        <property>
+          <key>.name</key>
+          <value>HealthCheckTask</value>
+        </property>
+      </properties>
+    </task>
+  </tasks>
   <smtpConfiguration>
     <hostname>smtp-host</hostname>
     <port>25</port>
     <username>smtp-username</username>
-    <password>{ft8rtC4lMhUHfWYyV4GQYmdVz3sQw+AGvTXKDna7GOc=}</password>
+    <password>{464ObSLn+3YHjKI/qsAZGNO1XE/V46GYaD10ORlUUlU=}</password>
     <systemEmailAddress>system@nexus.org</systemEmailAddress>
   </smtpConfiguration>
   <notification />

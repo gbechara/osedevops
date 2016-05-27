@@ -1,0 +1,13 @@
+---
+
+- name: Copy offine sample
+  copy: src="{{ item }}" dest="/usr/share/openshift/examples/xpaas-templates/"
+  with_fileglob:
+    - 1*.json
+  tags: example
+
+- name: Create offine sample
+  action: command oc create -f "{{ item }}" -n openshift
+  with_fileglob:
+    - 1*.json
+  tags: example

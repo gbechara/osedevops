@@ -11,7 +11,7 @@
 - name: Start Git Lab
   action: command sudo docker run --detach \
           --hostname gitlab.example.com \
-          --publish 443:443 --publish 80:80 --publish 2222:22 \
+          --publish 443:443 --publish 80:80 --publish 8022:22 \
           --name gitlab \
           --restart always \
           --volume /srv/gitlab/config:/etc/gitlab:Z \
@@ -56,7 +56,7 @@
 #    ports:
 #      - 443:443
 #      - 80:80
-#      - 2222:22
+#      - 8022:22
 #    restart_policy: always
 #    volumes:
 #      - /srv/gitlab/config:/etc/gitlab:Z
