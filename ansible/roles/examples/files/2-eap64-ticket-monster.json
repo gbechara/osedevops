@@ -177,7 +177,7 @@
                         "env": [
                             {
                             "name": "MAVEN_MIRROR_URL",
-                            "value": "http://nexus.example.com:8081/content/groups/jboss-group/"
+                            "value": "http://ose-master.example.com:8081/content/groups/jboss-group/"
                             }
                         ]
                     }
