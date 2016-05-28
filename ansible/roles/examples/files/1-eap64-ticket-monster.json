@@ -30,7 +30,7 @@
         {
             "description": "Git source URI for application",
             "name": "SOURCE_REPOSITORY_URL",
-            "value": "http://ose-master.example.com/gabriel/ticket-monster.git",
+            "value": "http://ose-infra.example.com/gabriel/ticket-monster.git",
             "required": true
         },
         {
@@ -177,7 +177,7 @@
                         "env": [
                             {
                             "name": "MAVEN_MIRROR_URL",
-                            "value": "http://ose-master.example.com:8081/content/groups/jboss-group/"
+                            "value": "http://ose-infra.example.com:8081/content/groups/jboss-group/"
                             }
                         ]
                     }
