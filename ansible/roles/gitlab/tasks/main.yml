@@ -21,6 +21,18 @@
   tags: gitlab
   ignore_errors: yes
 
+- name: Wait for Git Lab to start
+  wait_for: host=gitlab.example.com port=80 delay=60
+  tags: gitlab
+
+- name: Copy script update gitlab password
+  copy: src="gitlabpwd.sh" dest="." mode="0755"
+  tags: gitlab
+
+- name: Change Git Lab root password
+  shell: ./gitlabpwd.sh
+  tags: gitlab
+#
 #
 # SE Linux : Z options avaiable only in Ansible 2.1, OSE Ansible version is 1.9.4
 #

@@ -8,10 +8,10 @@
             "tags": "eap,javaee,java,jboss,xpaas",
             "version": "1.2.0"
         },
-        "name": "1-eap64-ticket-monster"
+        "name": "2-eap64-ticket-monster"
     },
     "labels": {
-        "template": "1-eap64-ticket-monster",
+        "template": "2-eap64-ticket-monster",
         "xpaas": "1.2.0"
     },
     "parameters": [
@@ -30,7 +30,7 @@
         {
             "description": "Git source URI for application",
             "name": "SOURCE_REPOSITORY_URL",
-            "value": "http://gitlab.example.com/gabriel/ticket-monster.git",
+            "value": "https://github.com/jboss-developer/ticket-monster",
             "required": true
         },
         {

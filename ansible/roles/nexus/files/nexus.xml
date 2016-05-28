@@ -264,8 +264,8 @@
       </externalConfiguration>
     </repository>
     <repository>
-      <id>redhat-ga-repository</id>
-      <name>redhat-ga-repository</name>
+      <id>redhat-techpreview-all-repository</id>
+      <name>redhat-techpreview-all-repository</name>
       <providerRole>org.sonatype.nexus.proxy.repository.Repository</providerRole>
       <providerHint>maven2</providerHint>
       <localStatus>IN_SERVICE</localStatus>
@@ -378,6 +378,7 @@
         <memberRepositories>
           <memberRepository>jboss-developer-staging-repository</memberRepository>
           <memberRepository>jboss-enterprise-maven-repository</memberRepository>
+          <memberRepository>redhat-techpreview-all-repository</memberRepository>
           <memberRepository>central</memberRepository>
         </memberRepositories>
       </externalConfiguration>

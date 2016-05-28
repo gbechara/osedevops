@@ -13,20 +13,30 @@ yum install wget git net-tools bind-utils iptables-services bridge-utils bash-co
 yum update -y
 yum install atomic-openshift-utils -y
 
+echo "Launch ansible-playbook"
 
-#yum install docker-1.9.1 -y
-#chkconfig NetworkManager off
-#service NetworkManager stop
+ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
 
-#nmcli connection modify enp0s3 +ipv4.dns 10.100.192.201
-#nmcli connection modify  enp0s3 +ipv4.dns-search 'example.com'
-#nmcli connection modify  enp0s3 ipv4.ignore-auto-dns true
-#service NetworkManager restart
+for host in 10.100.192.200 \
+10.100.192.201 \
+10.100.192.202; \
+do sshpass -p "weareawesome" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub $host; \
+done
 
+#sshpass -p "weareawesome"  ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub 10.100.192.200
 
-#mkdir -p /etc/ansible 
-#touch /etc/ansible/hosts
+# prepare the machines
+ansible-playbook /vagrant/ansible/oseprerequesites.yml -i /vagrant/ansible/hosts
 
-#cp /etc/resolv.conf /etc/resolv.conf.upstream
-#cp /vagrant/etc/dnsmasq.conf /etc/dnsmasq.conf
-#systemctl enable dnsmasq; systemctl start dnsmasq
+for host in ose-master.example.com \
+ose-infra.example.com \
+ose-node-1.example.com; \
+do sshpass -p "weareawesome" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub $host; \
+done
+
+# call ose installer
+ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/config.yml -i /vagrant/ansible/osehosts
+# add users
+ansible-playbook /vagrant/ansible/oseusers.yml -i /vagrant/ansible/hosts
+# finish set up
+ansible-playbook /vagrant/ansible/oseadditionalconf.yml -i /vagrant/ansible/hosts

@@ -4,10 +4,30 @@
   copy: src="{{ item }}" dest="/usr/share/openshift/examples/xpaas-templates/"
   with_fileglob:
     - 1*.json
-  tags: example
+  tags: examples
 
 - name: Create offine sample
   action: command oc create -f "{{ item }}" -n openshift
   with_fileglob:
     - 1*.json
-  tags: example
+  tags: examples
+
+# get the token
+# curl http://gitlab.example.com/api/v3/session --data 'login=root&password=weareawesome' | grep -o '"private_token":".*' | cut -d'"' -f 4
+# curl http://gitlab.example.com/api/v3/session --data 'login=root&password=weareawesome' | grep -o 'private_token.*' | cut -b 17-36
+- name: Git Lab get root token
+  shell: "curl http://gitlab.example.com/api/v3/session --data 'login=root&password=weareawesome' | grep -o 'private_token.*' | cut -b 17-36 > token.txt"
+  tags: examples
+
+#use the token to create user
+#curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/users" --data "email=gabriel@gab.com&password=weareawesome&username=gabriel&name=Gabriel Bechara"
+- name: Git Lab create user
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/users" --data "email=gabriel@gab.com&password=weareawesome&username=gabriel&name=Gabriel Bechara"'
+  tags: examples
+
+#use the token to create project
+#curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/jboss-developer/ticket-monster.git"
+- name: Git Lab root password create project and import sample
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/jboss-developer/ticket-monster.git"'
+  tags: examples
+
