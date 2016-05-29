@@ -31,3 +31,65 @@
   shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/jboss-developer/ticket-monster.git"'
   tags: examples
 
+- name: Create a dev project
+  action: command oc new-project development
+  tags: examples
+
+- name: Grant edit access to developer
+  action: command oc policy add-role-to-user edit dev1
+  tags: examples
+
+- name: Grant view access to tester
+  action: command oc policy add-role-to-user view test1
+  tags: examples
+
+- name: Create a test project
+  action: command oc new-project testing
+  tags: examples
+
+- name: Grant edit access to tester
+  action: command oc policy add-role-to-user edit test1
+  tags: examples
+
+- name: Enable the test project to pull development images
+  action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:testing -n development
+  tags: examples
+
+- name: Create an application in development
+  action: command oc login -u dev1 -p dev1
+  tags: examples
+
+- name: Create an application in development
+  action: command oc project development
+  tags: examples
+
+- name: Create an application in development
+  action: command oc new-app --template=1-eap64-ticket-monster -l name=monapplication
+  tags: examples
+
+- name: Wait for imagestream to be available before tagging
+  wait_for: host=ose-master.example.com port=80 delay=60
+  tags: examples
+
+- name: Tag the image to promote.
+  action: command oc tag development/eap-app:latest  development/eap-app:promote
+  tags: examples
+
+- name: Login as test1
+  action: command oc login -u test1 -p test1
+  tags: examples
+
+- name: Go to project testing
+  action: command oc project testing
+  tags: examples
+
+- name: Create a project in testing using the tag
+  action: command oc new-app development/eap-app:promote
+  tags: examples
+
+- name: Expose the testing application
+  action: command oc expose svc eap-app
+  tags: examples
+
+
+

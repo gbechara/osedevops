@@ -8,6 +8,11 @@
 Vagrant.configure(2) do |config|
  
   config.vm.synced_folder "ansible", "/vagrant/ansible"
+
+#  config.vm.synced_folder "ansible", "/vagrant/ansible", owner: 'vagrant', group: 'vagrant', mount_options: ['dmode=755', 'fmode=664', 'context=system_u:object_r:vmblock_t:s0']
+
+#  config.vm.synced_folder "ansible", "/vagrant/ansible", owner: 'vagrant', group: 'vagrant', mount_options: ['dmode=755', 'fmode=664', 'context=system_u:object_r:virt_use_nfs:s0']
+
   
   config.vm.define "ose-infra" do |d|
     d.vm.box = "rhel72-server-base.box"

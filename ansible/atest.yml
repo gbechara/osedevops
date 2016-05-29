@@ -1,8 +1,8 @@
 ---
 
-- hosts: infra
+- hosts: master
   user: root
 
   roles:
-  - gitlab
+  - examples
 

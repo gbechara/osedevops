@@ -20,3 +20,5 @@
     action: command htpasswd -b /etc/origin/master/htpasswd {{item}} {{item}}
     with_items:
     - 'demo1'
+    - 'dev1'
+    - 'test1'
