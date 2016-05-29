@@ -68,7 +68,7 @@
   tags: examples
 
 - name: Wait for imagestream to be available before tagging
-  wait_for: host=ose-master.example.com port=80 delay=60
+  wait_for: host=ose-infra.example.com port=80 delay=60
   tags: examples
 
 - name: Tag the image to promote.

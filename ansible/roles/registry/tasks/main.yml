@@ -8,3 +8,4 @@
             --images='registry.access.redhat.com/openshift3/ose-${component}:${version}' \
             --selector='region=primary,zone=master'
   ignore_errors: yes
+

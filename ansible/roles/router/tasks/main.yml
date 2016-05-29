@@ -6,3 +6,4 @@
           --selector='region=primary,zone=master' \
           --service-account=router
   ignore_errors: yes
+
