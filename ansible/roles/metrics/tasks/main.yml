@@ -45,10 +45,10 @@
   lineinfile: "dest=/etc/origin/master/master-config.yaml state=present insertafter='  publicURL: https://ose-master.example.com:8443/console/' line='  metricsPublicURL: https://hawkular-metrics.example.com/hawkular/metrics'"
   tags: hawkular-metrics
 
-- name: Change default node selector
-  lineinfile: 'dest=/etc/origin/master/master-config.yaml state=present regexp="  defaultNodeSelector:" line="  defaultNodeSelector: "region=primary,zone=dev""'
-  tags: nodeselector
+#- name: Change default node selector
+#  lineinfile: 'dest=/etc/origin/master/master-config.yaml state=present regexp="  defaultNodeSelector:" line="  defaultNodeSelector: "region=primary,zone=dev""'
+#  tags: nodeselector
 
-- name: Restart master
-  service: name=atomic-openshift-master state=restarted
-  tags: hawkular-metrics
+#- name: Restart master
+#  service: name=atomic-openshift-master state=restarted
+#  tags: hawkular-metrics

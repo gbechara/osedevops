@@ -1,0 +1,24 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/node-selector: region=primary,zone=dev
+    openshift.io/sa.initialized-roles: "true"
+    openshift.io/sa.scc.mcs: s0:c3,c2
+    openshift.io/sa.scc.supplemental-groups: 1000010000/10000
+    openshift.io/sa.scc.uid-range: 1000010000/10000
+  creationTimestamp: 2016-05-29T21:35:51Z
+  name: default
+  resourceVersion: "1083"
+  selfLink: /api/v1/namespaces/default
+  uid: 50e253c2-25e5-11e6-90d0-0800274ddf5f
+spec:
+  finalizers:
+  - kubernetes
+  - openshift.io/origin
+status:
+  phase: Active

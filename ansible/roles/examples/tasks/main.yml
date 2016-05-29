@@ -1,6 +1,15 @@
 ---
 
 - name: Copy offine sample
+  copy: src="default.yaml" dest="."
+  tags: examples
+
+- name: Copy offine sample
+  action: command oc replace namespace dafault -f default.yaml
+  tags: examples
+
+
+- name: Copy offine sample
   copy: src="{{ item }}" dest="/usr/share/openshift/examples/xpaas-templates/"
   with_fileglob:
     - 1*.json
