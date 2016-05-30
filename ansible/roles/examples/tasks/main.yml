@@ -5,7 +5,7 @@
   tags: examples
 
 - name: Copy offine sample
-  action: command oc replace namespace dafault -f default.yaml
+  action: command oc replace namespace default -f default.yaml
   tags: examples
 
 
