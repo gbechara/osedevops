@@ -83,9 +83,18 @@
   action: command oc new-app --template=1-eap64-ticket-monster -l name=monapplication
   tags: examples
 
-- name: Wait for imagestream to be available before tagging
-  wait_for: host=ose-infra.example.com port=80 delay=300
-  tags: examples
+#- name: Wait for imagestream to be available before tagging
+#  wait_for: host=ose-infra.example.com port=80 delay=300
+#  ignore_errors: yes
+#  tags: examples
+
+- name: Wait untils sample is deployes
+  command: curl --head --silent http://eap-app-development.router.default.svc.cluster.local/
+  register: result
+  until: result.stdout.find("200 OK") != -1
+  retries: 128
+  delay: 20
+  changed_when: false
 
 - name: Tag the image to promote.
   action: command oc tag development/eap-app:latest  development/eap-app:promote
