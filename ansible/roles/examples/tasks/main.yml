@@ -1,13 +1,20 @@
 ---
 
-- name: Copy offine sample
-  copy: src="default.yaml" dest="."
-  tags: examples
+- name: Copy default project with selector
+  copy: src="defaultwithselector.yaml" dest="."
+  tags: projectselector
 
-- name: Copy offine sample
-  action: command oc replace namespace default -f default.yaml
-  tags: examples
+- name: Create default project with selector
+  action: command oc create -f defaultwithselector.yaml -n default
+  tags: projectselector
 
+- name: Change default node selector
+  lineinfile: 'dest=/etc/origin/master/master-config.yaml state=present regexp="  projectRequestTemplate:" line="  projectRequestTemplate: "default/project-request""'
+  tags: projectselector
+
+- name: Restart master
+  service: name=atomic-openshift-master state=restarted
+  tags: projectselector
 
 - name: Copy offine sample
   copy: src="{{ item }}" dest="/usr/share/openshift/examples/xpaas-templates/"
@@ -77,7 +84,7 @@
   tags: examples
 
 - name: Wait for imagestream to be available before tagging
-  wait_for: host=ose-infra.example.com port=80 delay=60
+  wait_for: host=ose-infra.example.com port=80 delay=300
   tags: examples
 
 - name: Tag the image to promote.
