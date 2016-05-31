@@ -8,10 +8,10 @@
             "tags": "instant-app,eap,javaee,java,jboss,xpaas",
             "version": "1.2.0"
         },
-        "name": "1-eap64-ticket-monster"
+        "name": "1-eap64-ticket-monster-offline"
     },
     "labels": {
-        "template": "1-eap64-ticket-monster",
+        "template": "1-eap64-ticket-monster-offline",
         "xpaas": "1.2.0"
     },
     "parameters": [
@@ -168,7 +168,7 @@
                 "strategy": {
                     "type": "Source",
                     "sourceStrategy": {
-                        "forcePull": true,
+                        "forcePull": false,
                         "from": {
                             "kind": "ImageStreamTag",
                             "namespace": "${IMAGE_STREAM_NAMESPACE}",

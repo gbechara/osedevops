@@ -17,7 +17,7 @@
   tags: projectselector
 
 - name: Copy offine sample
-  copy: src="{{ item }}" dest="/usr/share/openshift/examples/xpaas-templates/"
+  copy: src="{{ item }}" dest="/usr/share/openshift/examples/quickstart-templates/"
   with_fileglob:
     - 1*.json
   tags: examples
@@ -43,8 +43,12 @@
 
 #use the token to create project
 #curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/jboss-developer/ticket-monster.git"
-- name: Git Lab root password create project and import sample
+- name: Git Lab root password create ticket-monster project and import sample
   shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/jboss-developer/ticket-monster.git"'
+  tags: examples
+
+- name: Git Lab root password create cake-php project and import sample
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=cake-php&public=true&import_url=https://github.com/openshift/cakephp-ex.git"'
   tags: examples
 
 - name: Create a dev project
@@ -79,8 +83,12 @@
   action: command oc project development
   tags: examples
 
-- name: Create an application in development
-  action: command oc new-app --template=1-eap64-ticket-monster -l name=monapplication
+- name: Create a Java application in development
+  action: command oc new-app --template=1-eap64-ticket-monster-offline -l name=monapplicationjava
+  tags: examples
+
+- name: Create a PHP application in development
+  action: command oc new-app --template=1-cake-php-offline -l name=monapplicationphp
   tags: examples
 
 #- name: Wait for imagestream to be available before tagging
@@ -88,7 +96,7 @@
 #  ignore_errors: yes
 #  tags: examples
 
-- name: Wait untils sample is deployes
+- name: Wait untils the Java app is deployed
   command: curl --head --silent http://eap-app-development.router.default.svc.cluster.local/
   register: result
   until: result.stdout.find("200 OK") != -1
