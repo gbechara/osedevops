@@ -88,7 +88,7 @@
   tags: examples
 
 - name: Create a PHP application in development
-  action: command oc new-app --template=1-cakephp-offline -l name=monapplicationphp
+  action: command oc new-app --template=1-cakephp-offline
   tags: examples
 
 #- name: Wait for imagestream to be available before tagging

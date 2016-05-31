@@ -5,7 +5,7 @@
         "name": "1-cakephp-offline",
         "annotations": {
             "description": "An example CakePHP application with no database",
-            "tags": "quickstart,php,cakephp",
+            "tags": "instant-app,quickstart,php,cakephp",
             "iconClass": "icon-php"
         }
     },
