@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: custom-jenkins-build
+spec:
+  source:                       
+    git:
+      uri: http://ose-infra.example.com/gabriel/osedevops-jenkins.git
+    type: Git
+  strategy:                     
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: jenkins:latest
+        namespace: openshift
+    type: Source
+  output:                       
+    to:
+      kind: ImageStreamTag
+      name: custom-jenkins:latest

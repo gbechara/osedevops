@@ -1,0 +1,49 @@
+---
+
+- name: Copy template
+  copy: src="myjenkins.yaml" dest="."
+  tags: examples
+
+
+# get the token
+- name: Git Lab get root token
+  shell: "curl http://gitlab.example.com/api/v3/session --data 'login=root&password=weareawesome' | grep -o 'private_token.*' | cut -b 17-36 > token.txt"
+  tags: jenkins
+
+#use the token to create user jenkins
+- name: Git Lab create user
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/users" --data "email=gabriel@gab.com&password=weareawesome&username=gabriel&name=gabriel"'
+  tags: jenkins
+
+#use the token to create project
+#curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=osedevops-jenkins&public=true&import_url=https://github.com/gbechara/osedevops-jenkins.git"
+- name: Git Lab jenkins project and import sample
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=osedevops-jenkins&public=true&import_url=https://github.com/gbechara/osedevops-jenkins.git"'
+  tags: jenkins
+
+
+- name: Login as admin
+  action: command oc login -u system:admin -n openshift
+  tags: jenkins
+
+
+- name: Create a custom jenkins builder
+  action: command oc create -f http://gitlab.example.com/gabriel/osedevops-jenkins/raw/master/custom-jenkins.build.yaml
+  tags: jenkins
+
+- name: Run the custom image builder
+  action: command oc start-build custom-jenkins-build --follow
+  tags: jenkins
+
+- name: Login as test1
+  action: command oc login -u test1 -p test1
+  tags: jenkins
+
+- name: New CI project
+  action: command oc new-project ci
+  tags: jenkins
+
+- name: New Jenkins app
+  action: command oc new-app jenkins-persistent
+  tags: jenkins
+
