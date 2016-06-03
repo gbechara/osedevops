@@ -60,11 +60,22 @@
   action: command oc new-app custom-jenkins-persistent
   tags: jenkins
 
+- name: Login System Admin
+  action: command oc login -u system:admin
+  tags: jenkins
 
-oc login -u system:admin
-oc policy add-role-to-user edit system:serviceaccount:ci:default -n development
-oc policy add-role-to-user edit system:serviceaccount:ci:default -n testing
-oc describe serviceaccount default
-oc describe secret <secret name from above>
+- name: Add edit role to project ... 1
+  action: command oc policy add-role-to-user edit system:serviceaccount:ci:default -n development
+  tags: jenkins
 
+- name: Add edit role on ...2
+  action: command oc policy add-role-to-user edit system:serviceaccount:ci:default -n testing
+  tags: jenkins
 
+#
+# oc delete bc custom-jenkins-build
+# oc delete template custom-jenkins-persistent
+# oc delete project ci
+# oc delete is custom-jenkins
+# ansible-playbook /vagrant/ansible/atest.yml -i /vagrant/ansible/hosts
+#
