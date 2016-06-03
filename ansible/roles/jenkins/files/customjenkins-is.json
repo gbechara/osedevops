@@ -1,0 +1,15 @@
+{
+  "kind": "ImageStreamList",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "custom-jenkins",
+        "creationTimestamp": null
+      }
+    }
+  ]
+}

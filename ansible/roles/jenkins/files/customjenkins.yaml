@@ -10,9 +10,8 @@ spec:
   strategy:                     
     sourceStrategy:
       from:
-        kind: ImageStreamTag
-        name: jenkins:latest
-        namespace: openshift
+        kind: DockerImage
+        name: openshift/jenkins-1-centos7
     type: Source
   output:                       
     to:

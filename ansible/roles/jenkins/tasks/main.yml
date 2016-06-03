@@ -1,9 +1,16 @@
 ---
 
-- name: Copy template
-  copy: src="myjenkins.yaml" dest="."
+- name: Copy custom jenkins builder
+  copy: src="customjenkins.yaml" dest="."
   tags: examples
 
+- name: Copy custom jenkins image stream template
+  copy: src="customjenkins-is.json" dest="."
+  tags: examples
+
+- name: Copy custom jenkins template
+  copy: src="custom-jenkins-persistent-template.json" dest="."
+  tags: examples
 
 # get the token
 - name: Git Lab get root token
@@ -21,18 +28,24 @@
   shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=osedevops-jenkins&public=true&import_url=https://github.com/gbechara/osedevops-jenkins.git"'
   tags: jenkins
 
-
 - name: Login as admin
   action: command oc login -u system:admin -n openshift
   tags: jenkins
 
+- name: Create a custom jenkins custom image stream
+  action: command oc create -f customjenkins-is.json
+  tags: jenkins
 
 - name: Create a custom jenkins builder
-  action: command oc create -f http://gitlab.example.com/gabriel/osedevops-jenkins/raw/master/custom-jenkins.build.yaml
+  action: command oc create -f customjenkins.yaml
   tags: jenkins
 
 - name: Run the custom image builder
   action: command oc start-build custom-jenkins-build --follow
+  tags: jenkins
+
+- name: Create a custom jenkins template
+  action: command oc create -f custom-jenkins-persistent-template.json
   tags: jenkins
 
 - name: Login as test1
@@ -44,6 +57,14 @@
   tags: jenkins
 
 - name: New Jenkins app
-  action: command oc new-app jenkins-persistent
+  action: command oc new-app custom-jenkins-persistent
   tags: jenkins
+
+
+oc login -u system:admin
+oc policy add-role-to-user edit system:serviceaccount:ci:default -n development
+oc policy add-role-to-user edit system:serviceaccount:ci:default -n testing
+oc describe serviceaccount default
+oc describe secret <secret name from above>
+
 
