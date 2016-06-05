@@ -109,7 +109,7 @@
   changed_when: false
 
 - name: Tag the image to promote.
-  action: command oc tag development/eap-app:latest  development/eap-app:promote
+  action: command oc tag development/eap-app:latest testing/eap-app:promote
   tags: examples
 
 - name: Login as test1
@@ -121,7 +121,7 @@
   tags: examples
 
 - name: Create a project in testing using the tag
-  action: command oc new-app development/eap-app:promote
+  action: command oc new-app testing/eap-app:promote
   tags: examples
 
 - name: Expose the testing application
