@@ -76,6 +76,10 @@
   tags: examples
 
 - name: Enable the production project to pull test images
+  action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:production -n development
+  tags: examples
+
+- name: Enable the production project to pull development images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:production -n testing
   tags: examples
 
