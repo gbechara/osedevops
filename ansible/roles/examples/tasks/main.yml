@@ -42,9 +42,9 @@
   tags: examples
 
 #use the token to create project
-#curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/jboss-developer/ticket-monster.git"
+#curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/gbechara/osedevops-ticket-monster.git"
 - name: Git Lab root password create ticket-monster project and import sample
-  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/jboss-developer/ticket-monster.git"'
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=ticket-monster&public=true&import_url=https://github.com/gbechara/osedevops-ticket-monster.git"'
   tags: examples
 
 - name: Git Lab root password create cake-php project and import sample
@@ -108,12 +108,12 @@
   delay: 20
   changed_when: false
 
-- name: Tag the image to promote.
-  action: command oc tag development/eap-app:latest testing/eap-app:promote
-  tags: examples
-
 - name: Login as test1
   action: command oc login -u test1 -p test1
+  tags: examples
+
+- name: Tag the image to promote.
+  action: command oc tag development/eap-app:latest testing/eap-app:promote
   tags: examples
 
 - name: Go to project testing
