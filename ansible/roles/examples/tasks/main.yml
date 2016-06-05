@@ -113,7 +113,7 @@
   tags: examples
 
 - name: Tag the image to promote.
-  action: command oc tag development/eap-app:latest testing/eap-app:promote
+  action: command oc tag development/eap-app:latest testing/eap-app:latest
   tags: examples
 
 - name: Go to project testing
@@ -121,7 +121,7 @@
   tags: examples
 
 - name: Create a project in testing using the tag
-  action: command oc new-app testing/eap-app:promote
+  action: command oc new-app testing/eap-app:latest
   tags: examples
 
 - name: Expose the testing application
