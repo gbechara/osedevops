@@ -6,7 +6,10 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
- 
+
+#  config.registration.username = 'user-name'
+#  config.registration.password = 'password'
+#  config.registration.pools = [ 'poolid' ]
   config.vm.synced_folder "ansible", "/vagrant/ansible"
 
 #  config.vm.synced_folder "ansible", "/vagrant/ansible", owner: 'vagrant', group: 'vagrant', mount_options: ['dmode=755', 'fmode=664', 'context=system_u:object_r:vmblock_t:s0']

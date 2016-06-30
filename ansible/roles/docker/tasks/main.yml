@@ -1,6 +1,6 @@
 
 - name: Docker is present
-  yum: name=docker-1.9.1 state=latest
+  yum: name=docker state=latest
   tags: docker
 
 
