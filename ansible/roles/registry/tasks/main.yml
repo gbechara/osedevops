@@ -5,13 +5,13 @@
 
 
 # Restart Master to avoid placement issue : Failed to fit in any node fit failure on node (ose-master.example.com): MatchNodeSelector
-- name: Restart master
-  service: name=atomic-openshift-master state=restarted
-  tags: registry
+#- name: Restart master
+#  service: name=atomic-openshift-master state=restarted
+#  tags: registry
 
 - name: Create registry on master
   action: command oadm registry --config=/etc/origin/master/admin.kubeconfig \
             --images='registry.access.redhat.com/openshift3/ose-${component}:${version}' \
-            --selector='kubernetes.io/hostname=ose-master.example.com,region=primary,zone=master'
+            --selector='zone=master'
   ignore_errors: yes
   tags: registry
