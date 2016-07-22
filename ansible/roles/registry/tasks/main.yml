@@ -1,6 +1,6 @@
 ---
 
-#- name: Master to be schedulable, done in osehost
+#- name: Master to be schedulable, done in osehosts
 #  action: command oadm manage-node ose-master.example.com --schedulable=true
 
 
@@ -12,6 +12,6 @@
 - name: Create registry on master
   action: command oadm registry --config=/etc/origin/master/admin.kubeconfig \
             --images='registry.access.redhat.com/openshift3/ose-${component}:${version}' \
-            --selector='zone=master'
+            --selector='region=primary,zone=master'
   ignore_errors: yes
   tags: registry
