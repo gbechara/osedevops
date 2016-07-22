@@ -3,7 +3,7 @@
 - name: Create router on master
   action: command oadm router router --replicas=1 --config=/etc/origin/master/admin.kubeconfig \
           --images='registry.access.redhat.com/openshift3/ose-${component}:${version}' \
-          --selector='region=primary,zone=master' \
+          --selector='kubernetes.io/hostname=ose-master.example.com,region=primary,zone=master' \
           --service-account=router
   ignore_errors: yes
-
+  tags: router
