@@ -8,18 +8,16 @@
 
 - hosts: nodes
   user: root
-
   roles:
   - nfsclient
 
 
 - hosts: master
   user: root
-
   roles:
+  - persistentvolumes
   - registry
   - router
-  - persistentvolumes
   - metrics
   - examples
   - jenkins

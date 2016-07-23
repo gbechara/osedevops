@@ -3,15 +3,14 @@
 #- name: Master to be schedulable, done in osehosts
 #  action: command oadm manage-node ose-master.example.com --schedulable=true
 
-
-# Restart Master to avoid placement issue : Failed to fit in any node fit failure on node (ose-master.example.com): MatchNodeSelector
-#- name: Restart master
-#  service: name=atomic-openshift-master state=restarted
+#- name: Wait before deploying the registry to work around admission control scheduling, not needed , needs region=infra for deployer
+#  pause:
+#    seconds: 300
 #  tags: registry
 
 - name: Create registry on master
   action: command oadm registry --config=/etc/origin/master/admin.kubeconfig \
             --images='registry.access.redhat.com/openshift3/ose-${component}:${version}' \
-            --selector='region=primary,zone=master'
+            --selector='region=infra,zone=master'
   ignore_errors: yes
   tags: registry
