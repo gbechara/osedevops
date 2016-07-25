@@ -251,7 +251,7 @@
                    "name": "SOURCE_REPOSITORY_URL",
                    "displayName": "Git Repository URL",
                    "description": "The URL of the repository with your application source code.",
-                   "value": "http://ose-infra.example.com/gabriel/cake-php.git"
+                   "value": "http://ose-utils.example.com/gabriel/cake-php.git"
                    },
                    {
                    "name": "SOURCE_REPOSITORY_REF",

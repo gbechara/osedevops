@@ -6,7 +6,7 @@
 [dns-servers]
 10.100.192.201
 
-[infra]
+[utils]
 10.100.192.201
 
 [nfs-servers]

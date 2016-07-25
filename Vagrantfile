@@ -17,9 +17,9 @@ Vagrant.configure(2) do |config|
 #  config.vm.synced_folder "ansible", "/vagrant/ansible", owner: 'vagrant', group: 'vagrant', mount_options: ['dmode=755', 'fmode=664', 'context=system_u:object_r:virt_use_nfs:s0']
 
   
-  config.vm.define "ose-infra" do |d|
+  config.vm.define "ose-utils" do |d|
     d.vm.box = "rhel72-server-base.box"
-    d.vm.hostname = "ose-infra.example.com"
+    d.vm.hostname = "ose-utils.example.com"
     d.vm.network "private_network", ip: "10.100.192.201"
     d.vm.provider "virtualbox" do |v|
       v.memory = 2048

@@ -29,7 +29,7 @@ done
 ansible-playbook /vagrant/ansible/oseprerequesites.yml -i /vagrant/ansible/hosts
 
 for host in ose-master.example.com \
-ose-infra.example.com \
+ose-utils.example.com \
 ose-node-1.example.com; \
 do sshpass -p "weareawesome" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub $host; \
 done

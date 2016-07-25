@@ -13,7 +13,7 @@
 
 - name: Start nexus
   action: command docker run --detach \
-          --hostname ose-infra.example.com \
+          --hostname ose-utils.example.com \
           --publish 8081:8081 \
           --name nexus \
           --restart always \

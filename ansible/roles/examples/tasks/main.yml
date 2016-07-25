@@ -100,7 +100,7 @@
   tags: examples
 
 #- name: Wait for imagestream to be available before tagging
-#  wait_for: host=ose-infra.example.com port=80 delay=300
+#  wait_for: host=ose-utils.example.com port=80 delay=300
 #  ignore_errors: yes
 #  tags: examples
 

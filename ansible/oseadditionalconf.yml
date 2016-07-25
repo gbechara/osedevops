@@ -1,6 +1,6 @@
 ---
 
-- hosts: infra
+- hosts: utils
   user: root
   roles:
   - gitlab

@@ -5,7 +5,7 @@ metadata:
 spec:
   source:                       
     git:
-      uri: http://ose-infra.example.com/gabriel/osedevops-jenkins.git
+      uri: http://ose-utils.example.com/gabriel/osedevops-jenkins.git
     type: Git
   strategy:                     
     sourceStrategy:
