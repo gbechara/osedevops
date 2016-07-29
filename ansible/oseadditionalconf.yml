@@ -16,8 +16,9 @@
   user: root
   roles:
   - persistentvolumes
-  - registry
-  - router
+# registry and router are now created by installer on node region=infra (3.2.1.9-1-g2265530)
+#  - registry
+#  - router
   - metrics
   - examples
   - jenkins
