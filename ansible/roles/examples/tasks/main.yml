@@ -19,13 +19,13 @@
 - name: Copy offine sample
   copy: src="{{ item }}" dest="/usr/share/openshift/examples/quickstart-templates/"
   with_fileglob:
-    - 1*.json
+    - ./1*.json
   tags: examples
 
 - name: Create offine sample
   action: command oc create -f "{{ item }}" -n openshift
   with_fileglob:
-    - 1*.json
+    - /usr/share/openshift/examples/quickstart-templates/1*.json
   tags: examples
 
 # get the token
@@ -49,6 +49,10 @@
 
 - name: Git Lab root password create cake-php project and import sample
   shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=cake-php&public=true&import_url=https://github.com/openshift/cakephp-ex.git"'
+  tags: examples
+
+- name: Add webhook to cake-php project
+  shell: 'curl --request POST --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/2/hooks" --data "url=https://github.com/openshift/cakephp-ex.git&enable_ssl_verification=false"'
   tags: examples
 
 - name: Create a dev project
