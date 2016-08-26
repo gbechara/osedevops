@@ -52,7 +52,7 @@
   tags: examples
 
 - name: Add webhook to cake-php project
-  shell: 'curl --request POST --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/2/hooks" --data "url=https://github.com/openshift/cakephp-ex.git&enable_ssl_verification=false"'
+  shell: 'curl --request POST --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/2/hooks" --data "url=https://ose-master.example.com:8443/oapi/v1/namespaces/development/buildconfigs/cakephp-offline/webhooks/secret101/generic&enable_ssl_verification=false"'
   tags: examples
 
 - name: Create a dev project
