@@ -20,6 +20,7 @@
 *.tar
 *.zip
 *.box
+*.retry
 
 # Logs and databases #
 ######################

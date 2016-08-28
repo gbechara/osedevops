@@ -3,5 +3,5 @@
 - name: Create persitent volumes
   action: command  oc create -f "{{ item }}"
   with_fileglob:
-  - pv*.json
+  - ./pv*.json
   tags: persistent-volumes
