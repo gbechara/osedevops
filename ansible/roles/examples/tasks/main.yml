@@ -55,6 +55,10 @@
   shell: 'curl --request POST --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/2/hooks" --data "url=https://ose-master.example.com:8443/oapi/v1/namespaces/development/buildconfigs/cakephp-offline/webhooks/secret101/generic&enable_ssl_verification=false"'
   tags: examples
 
+- name: Git Lab root password create nodejs project and import sample
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=nodejs-example&public=true&import_url=https://github.com/openshift/nodejs-ex.git"'
+  tags: examples
+
 - name: Create a dev project
   action: command oc new-project development
   tags: examples

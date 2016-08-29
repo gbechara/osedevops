@@ -258,7 +258,7 @@
       "displayName": "Git Repository URL",
       "description": "The URL of the repository with your application source code.",
       "required": true,
-      "value": "https://github.com/openshift/nodejs-ex.git"
+      "value": "http://ose-utils.example.com/gabriel/nodejs-example.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
