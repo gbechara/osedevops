@@ -103,6 +103,10 @@
   action: command oc new-app --template=1-cakephp-offline
   tags: examples
 
+- name: Create a NodeJS application in development
+  action: command oc new-app --template=1-nodejs-offline-example
+  tags: examples
+
 #- name: Wait for imagestream to be available before tagging
 #  wait_for: host=ose-utils.example.com port=80 delay=300
 #  ignore_errors: yes
