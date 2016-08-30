@@ -124,25 +124,26 @@
   delay: 20
   changed_when: false
 
-- name: Login as test1
-  action: command oc login -u test1 -p test1
-  tags: examples
+# Next steps are done in the Jenkins Pipelines, uncomment if you want to do those during the install
+#- name: Login as test1
+#  action: command oc login -u test1 -p test1
+#  tags: examples
 
-- name: Tag the image to promote.
-  action: command oc tag development/eap-app:latest testing/eap-app:latest
-  tags: examples
+#- name: Tag the image to promote.
+#  action: command oc tag development/eap-app:latest testing/eap-app:latest
+#  tags: examples
 
-- name: Go to project testing
-  action: command oc project testing
-  tags: examples
+#- name: Go to project testing
+#  action: command oc project testing
+#  tags: examples
 
-- name: Create a project in testing using the tag
-  action: command oc new-app testing/eap-app:latest
-  tags: examples
+#- name: Create a project in testing using the tag
+#  action: command oc new-app testing/eap-app:latest
+#  tags: examples
 
-- name: Expose the testing application
-  action: command oc expose svc eap-app
-  tags: examples
+#- name: Expose the testing application
+#  action: command oc expose svc eap-app
+#  tags: examples
 
 
 
