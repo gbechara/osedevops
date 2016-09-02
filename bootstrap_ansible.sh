@@ -3,7 +3,7 @@
 set -e
 
 echo "Installing Open Shift prereq ..., base vbox must contains adequate subs"
-yum update -y
+# yum update -y : better to update the box base box manually if needed for RHEL to avoid some issues
 subscription-manager repos --disable="*"
 subscription-manager repos \
     --enable="rhel-7-server-rpms" \
