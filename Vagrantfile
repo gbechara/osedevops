@@ -22,7 +22,8 @@ Vagrant.configure(2) do |config|
     d.vm.hostname = "ose-utils.example.com"
     d.vm.network "private_network", ip: "10.100.192.201"
     d.vm.provider "virtualbox" do |v|
-      v.memory = 2048
+      v.memory = 3072
+#      v.memory = 2048
     end
     d.vm.provider :"virtualbox" do |vb|
       vb.gui = true
@@ -52,6 +53,7 @@ Vagrant.configure(2) do |config|
       d.vm.provider "virtualbox" do |v|
 #        v.memory = 4096
         v.memory = 3072
+#        v.memory = 2048
         v.cpus = 2
       end
       d.vm.provision :"shell", path: "bootstrap_ansible.sh"
