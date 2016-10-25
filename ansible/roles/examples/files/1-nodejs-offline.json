@@ -317,7 +317,7 @@
       "name": "NPM_MIRROR",
       "displayName": "Custom NPM Mirror URL",
       "description": "The custom NPM mirror URL",
-      "value": "http://ose-utils.example.com:8081/content/repositories/npm/"
+      "value": "http://ose-utils.example.com:8081/nexus/content/repositories/npm/"
     }
   ]
 }
