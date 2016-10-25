@@ -67,8 +67,8 @@
   action: command oc policy add-role-to-user edit dev1
   tags: examples
 
-- name: Grant view access to tester
-  action: command oc policy add-role-to-user view test1
+- name: Grant edit access to tester
+  action: command oc policy add-role-to-user edit test1
   tags: examples
 
 - name: Create a test project
