@@ -12,6 +12,18 @@
   lineinfile: 'dest=/etc/origin/master/master-config.yaml state=present regexp="  projectRequestTemplate:" line="  projectRequestTemplate: "default/project-request""'
   tags: projectselector
 
+- name: Add techpreview file in master config
+  copy: src="tech-preview.js" dest="."
+  tags: techpreview
+
+- name: Add techpreview file in master config
+  lineinfile: "dest=/etc/origin/master/master-config.yaml state=present insertafter='    requestTimeoutSeconds: 0' line='  extensionScripts:'"
+  tags: techpreview
+
+- name: Add techpreview file in master config
+  lineinfile: "dest=/etc/origin/master/master-config.yaml state=present insertafter='  extensionScripts:' line='    - /root/tech-preview.js'"
+  tags: techpreview
+
 - name: Restart master
   service: name=atomic-openshift-master state=restarted
   tags: projectselector
@@ -78,6 +90,22 @@
 - name: Grant edit access to tester
   action: command oc policy add-role-to-user edit test1
   tags: examples
+
+- name: Grant user dev1 admin role on project developement
+  action: command oc policy add-role-to-user admin dev1 -n development
+  tags: examples
+
+- name: Copy pipeline build
+  copy: src="pipeline.yaml" dest="."
+  tags: pipeline
+
+- name: Create pipeline build in developement
+  action: command oc create -f pipeline.yaml -n development
+  tags: pipeline
+
+- name: Create jenkins app for pipelines in
+  action: command oc new-app jenkins-ephemeral -p JENKINS_PASSWORD=password -n development
+  tags: pipeline
 
 - name: Enable the test project to pull development images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:testing -n development
