@@ -52,8 +52,8 @@
   action: command oc login -u test1 -p test1
   tags: jenkins
 
-- name: New CI project
-  action: command oc new-project ci
+- name: New CICD project
+  action: command oc new-project cicd
   tags: jenkins
 
 - name: New Jenkins app
