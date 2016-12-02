@@ -20,11 +20,11 @@ Vagrant.configure(2) do |config|
   config.vm.define "ose-utils" do |d|
     d.vm.box = "rhel72-server-base.box"
     d.vm.hostname = "ose-utils.example.com"
-    d.vm.network "private_network", ip: "10.100.192.201", auto_config: false
+    d.vm.network "private_network", ip: "10.100.192.201", auto_config: true
     d.vm.provider "virtualbox" do |v|
 #      v.memory = 3072
-#      v.memory = 2048
-      v.memory = 4096
+      v.memory = 2048
+#      v.memory = 4096
 #      v.memory = 6144
     end
     d.vm.provider :"virtualbox" do |vb|
@@ -36,11 +36,12 @@ Vagrant.configure(2) do |config|
     config.vm.define "ose-node-#{i}" do |d|
       d.vm.box = "rhel72-server-base.box"
       d.vm.hostname = "ose-node-#{i}.example.com"
-      d.vm.network "private_network", ip: "10.100.192.20#{i+1}", auto_config: false
+      d.vm.network "private_network", ip: "10.100.192.20#{i+1}", auto_config: true
       d.vm.provider "virtualbox" do |v|
 #        v.memory = 2048
-        v.memory = 3072
-        v.cpus = 2
+#        v.memory = 3072
+        v.memory = 10240
+        v.cpus = 4
       end
       d.vm.provider :"virtualbox" do |vb|
         vb.gui = true
@@ -51,11 +52,11 @@ Vagrant.configure(2) do |config|
   config.vm.define "ose-master" do |d|
       d.vm.box = "rhel72-server-base.box"
       d.vm.hostname = "ose-master.example.com"
-      d.vm.network "private_network", ip: "10.100.192.200", auto_config: false
+      d.vm.network "private_network", ip: "10.100.192.200", auto_config: true
       d.vm.provider "virtualbox" do |v|
 #        v.memory = 4096
-        v.memory = 3072
-#        v.memory = 2048
+#        v.memory = 3072
+        v.memory = 2048
         v.cpus = 2
       end
       d.vm.provision :"shell", path: "bootstrap_ansible.sh"
