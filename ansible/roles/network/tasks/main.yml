@@ -7,7 +7,7 @@
 
 # to overcome vagrant that can add its config into enp0s3
 - name: Chattr -i /etc/sysconfig/network-scripts/ifcfg-enp0s3 Vagrant workaround
-  action: command chattr -i /etc/sysconfig/network-scripts/ifcfg-enp0s3
+  action: command chattr +i /etc/sysconfig/network-scripts/ifcfg-enp0s3
 
 - name: Chattr -i /etc/resolv.conf
   action: command chattr -i /etc/resolv.conf 

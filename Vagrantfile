@@ -40,7 +40,7 @@ Vagrant.configure(2) do |config|
       d.vm.provider "virtualbox" do |v|
 #        v.memory = 2048
 #        v.memory = 4086
-         v.memory = 8172
+         v.memory = 9196
 #        v.memory = 10240
         v.cpus = 2
       end
