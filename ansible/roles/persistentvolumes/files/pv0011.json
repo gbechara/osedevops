@@ -1,0 +1,18 @@
+{
+    "apiVersion": "v1",
+    "kind": "PersistentVolume",
+    "metadata": {
+        "name": "pv0011"
+    },
+    "spec": {
+        "capacity": {
+            "storage": "25Gi"
+        },
+        "accessModes": [ "ReadWriteOnce", "ReadWriteMany" ],
+        "nfs": {
+            "path": "/opt/nfs/pv0011",
+            "server": "10.100.192.201"
+        },
+        "persistentVolumeReclaimPolicy": "Recycle"
+    }
+}
