@@ -1,11 +1,11 @@
 TYPE="Ethernet"
-BOOTPROTO="static"
+BOOTPROTO="none"
 NM_CONTROLLED=no
 DEFROUTE="yes"
 #NETWORK=10.100.192.0
 NETMASK=255.255.255.0
 IPADDR={{ inventory_hostname }}
-PEERDNS="yes"
+PEERDNS="no"
 PEERROUTES="yes"
 IPV4_FAILURE_FATAL="no"
 IPV6INIT="yes"
