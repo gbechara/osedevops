@@ -17,6 +17,10 @@
           cluster-reader system:serviceaccount:openshift-infra:heapster -n openshift-infra
   tags: hawkular-metrics
 
+- name: Grant Hawkular service account the view permission view resource in openshift-infra
+  action: command oc adm policy add-role-to-user view system:serviceaccount:openshift-infra:hawkular -n openshift-infra
+  tags: hawkular-metrics
+
 - name: Create a "dummy" secret that does not specify a certificate value for the metrics deployer
   action: command oc secrets new metrics-deployer nothing=/dev/null -n openshift-infra
   tags: hawkular-metrics
