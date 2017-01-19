@@ -129,7 +129,7 @@ parameters:
 -
   description: "If preflight validation is blocking deployment and you're sure you don't care about it, this will ignore the results and proceed to deploy."
   name: IGNORE_PREFLIGHT
-  value: "false"
+  value: "true"
 -
   description: "Set to true for persistent storage, set to false to use non persistent storage"
   name: USE_PERSISTENT_STORAGE
