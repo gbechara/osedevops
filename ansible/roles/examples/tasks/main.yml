@@ -103,9 +103,9 @@
   action: command oc create -f pipeline.yaml -n development
   tags: pipeline
 
-- name: Create jenkins app for pipelines in
-  action: command oc new-app jenkins-ephemeral -p JENKINS_PASSWORD=password -n development
-  tags: pipeline
+#- name: Create jenkins app for pipelines in not needed in 3.4 anymore, created automatically with the pipeline ?
+#  action: command oc new-app jenkins-ephemeral -p JENKINS_PASSWORD=password -n development
+#  tags: pipeline
 
 - name: Enable the test project to pull development images
   action: command oc policy add-role-to-group system:image-puller system:serviceaccounts:testing -n development
