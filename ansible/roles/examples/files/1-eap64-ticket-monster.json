@@ -6,13 +6,13 @@
             "iconClass": "icon-jboss",
             "description": "Application template for EAP 6 applications built using S2I.",
             "tags": "instant-app,eap,javaee,java,jboss,xpaas",
-            "version": "1.2.0"
+            "version": "1.4.0"
         },
         "name": "1-eap64-ticket-monster-offline"
     },
     "labels": {
         "template": "1-eap64-ticket-monster-offline",
-        "xpaas": "1.2.0"
+        "xpaas": "1.4.0"
     },
     "parameters": [
         {
@@ -172,7 +172,7 @@
                         "from": {
                             "kind": "ImageStreamTag",
                             "namespace": "${IMAGE_STREAM_NAMESPACE}",
-                            "name": "jboss-eap64-openshift:1.2"
+                            "name": "jboss-eap64-openshift:1.4"
                         },
                         "env": [
                             {

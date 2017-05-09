@@ -21,6 +21,7 @@
 *.zip
 *.box
 *.retry
+*.rpm
 
 # Logs and databases #
 ######################

@@ -103,7 +103,7 @@
   action: command oc create -f pipeline.yaml -n development
   tags: pipeline
 
-#- name: Create jenkins app for pipelines in not needed in 3.4 anymore, created automatically with the pipeline ?
+#- name: Create jenkins app for pipelines in not needed since 3.4 anymore, created automatically with the pipeline ?
 #  action: command oc new-app jenkins-ephemeral -p JENKINS_PASSWORD=password -n development
 #  tags: pipeline
 

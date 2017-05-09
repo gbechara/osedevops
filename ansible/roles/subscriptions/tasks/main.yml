@@ -2,5 +2,5 @@
 - name: Disable all respositories 
   action: command subscription-manager repos --disable="*"
 
-- name: Add adequate ose-3.4 respositories to subscriptions
-  action: command subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ose-3.4-rpms"
+- name: Add adequate ose-3.5 respositories to subscriptions
+  action: command subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ose-3.5-rpms" --enable="rhel-7-fast-datapath-rpms"
