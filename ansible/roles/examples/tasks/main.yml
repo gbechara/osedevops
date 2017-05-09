@@ -144,7 +144,7 @@
 #  ignore_errors: yes
 #  tags: examples
 
-- name: Wait untils the Java app is deployed
+- name: Wait until the Java app is deployed
   command: curl --head --silent http://eap-app-development.router.default.svc.cluster.local/
   register: result
   until: result.stdout.find("200 OK") != -1
