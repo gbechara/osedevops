@@ -190,7 +190,7 @@
   tags: examples
 
 - name: Expose aggregator application
-  action: command oc oc expose service aggregator
+  action: command oc expose service aggregator
   tags: examples
 
 - name: Create a article application
@@ -198,14 +198,14 @@
   tags: examples
 
 - name: Expose articles application
-  action: command oc oc expose service articles
+  action: command oc expose service articles
   tags: examples
 
 - name: Expose spring-boot-hello application
-  action: command oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name spring-boot-hello --context-dir=spring-boot-hello
+  action: command oc new-app openshift/redhat-openjdk18-openshift:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name spring-boot-hello --context-dir=spring-boot-hello
   tags: examples
 
 - name: Expose spring-boot-hello application
-  action: command oc oc expose service spring-boot-hello
+  action: command oc expose service spring-boot-hello
   tags: examples
 
