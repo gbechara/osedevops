@@ -50,7 +50,7 @@
 #use the token to create user
 #curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/users" --data "email=gabriel@gab.com&password=weareawesome&username=gabriel&name=Gabriel Bechara"
 - name: Git Lab create user
-  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/users" --data "email=gabriel@gab.com&password=weareawesome&username=gabriel&name=Gabriel Bechara"'
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/users" --data "email=gabriel@gab.com&password=weareawesome&username=gabriel&name=Gabriel Bechara&confirm=false"'
   tags: examples
 
 #use the token to create project
@@ -173,5 +173,39 @@
 #  action: command oc expose svc eap-app
 #  tags: examples
 
+- name: Git Lab create news-aggregator project and import sample
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=news-aggregator&public=true&import_url=https://github.com/gbechara/osedevops-news-aggregator.git"'
+  tags: examples
 
+- name: Create an news-aggregator in development
+  action: command oc login -u dev1 -p dev1
+  tags: examples
+
+- name: Create news-aggregator project
+  action: command oc new-project news-aggregator
+  tags: examples
+
+- name: Create aggregator application
+  action: command oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name aggregator --context-dir=aggregator
+  tags: examples
+
+- name: Expose aggregator application
+  action: command oc oc expose service aggregator
+  tags: examples
+
+- name: Create a article application
+  action: command oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name articles --context-dir=articles
+  tags: examples
+
+- name: Expose articles application
+  action: command oc oc expose service articles
+  tags: examples
+
+- name: Expose spring-boot-hello application
+  action: command oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name spring-boot-hello --context-dir=spring-boot-hello
+  tags: examples
+
+- name: Expose spring-boot-hello application
+  action: command oc oc expose service spring-boot-hello
+  tags: examples
 
