@@ -23,7 +23,7 @@ spec:
       jenkinsfile: |
         node('maven') {
           stage 'create-spring-boot-hello-app'
-          sh "oc new-app openshift/redhat-openjdk18-openshift:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name spring-boot-hello --context-dir=spring-boot-hello --env MAVEN_MIRROR_URL='http://ose-utils.example.com:8081/nexus/content/groups/jboss-group/' || echo 'Build exists'"
+          sh "oc new-app openshift/redhat-openjdk18-openshift:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name spring-boot-hello --context-dir=spring-boot-hello --param=MAVEN_MIRROR_URL='http://ose-utils.example.com:8081/nexus/content/groups/jboss-group/' || echo 'Build exists'"
           stage 'build-spring-boot-hello'
           openshiftBuild(buildConfig: 'spring-boot-hello', showBuildLogs: 'true')
           stage 'deploy-spring-boot-hello'
