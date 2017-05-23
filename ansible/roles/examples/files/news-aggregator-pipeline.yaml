@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  name: news-aggregator-pipeline
+  labels:
+    name: devpipeline
+  annotations:
+    pipeline.alpha.openshift.io/uses: '[{"name": "cakephp-offline", "namespace": "", "kind": "DeploymentConfig"}]'
+spec:
+  triggers:
+    - type: GitHub
+      github:
+        secret: secret101
+    - type: Generic
+      generic:
+        secret: secret101
+  runPolicy: Serial
+  source:
+    type: None
+  strategy:
+    type: JenkinsPipeline
+    jenkinsPipelineStrategy:
+      jenkinsfile: |
+        node('maven') {
+          stage 'create-spring-boot-hello-app'
+          sh "oc new-app openshift/redhat-openjdk18-openshift:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name spring-boot-hello --context-dir=spring-boot-hello --env MAVEN_MIRROR_URL='http://ose-utils.example.com:8081/nexus/content/groups/jboss-group/' || echo 'Build exists'"
+          stage 'build-spring-boot-hello'
+          openshiftBuild(buildConfig: 'spring-boot-hello', showBuildLogs: 'true')
+          stage 'deploy-spring-boot-hello'
+          openshiftDeploy(deploymentConfig: 'spring-boot-hello')
+          openshiftScale(deploymentConfig: 'spring-boot-hello',replicaCount: '3')
+          sh "oc expose svc spring-boot-hello || echo 'Service already exposed'"
+        }
+        node('maven') {
+          stage 'create-aggregator-app'
+          sh "oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name aggregator --context-dir=aggregator || echo 'Build exists'"
+          stage 'build-aggregator'
+          openshiftBuild(buildConfig: 'aggregator', showBuildLogs: 'true')
+          stage 'deploy-aggregator'
+          openshiftDeploy(deploymentConfig: 'aggregator')
+          openshiftScale(deploymentConfig: 'aggregator',replicaCount: '1')
+          sh "oc expose svc aggregator || echo 'Service already exposed'"
+        }
+        node('maven') {
+          stage 'create-articles-app'
+          sh "oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name articles --context-dir=articles || echo 'Build exists'"
+          stage 'build-articles'
+          openshiftBuild(buildConfig: 'articles', showBuildLogs: 'true')
+          stage 'deploy-articles'
+          openshiftDeploy(deploymentConfig: 'articles')
+          openshiftScale(deploymentConfig: 'articles',replicaCount: '2')
+          sh "oc expose svc articles || echo 'Service already exposed'"
+        }
+  output: {}
+  resources: {}
+  postCommit: {}
