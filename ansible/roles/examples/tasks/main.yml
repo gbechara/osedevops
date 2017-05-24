@@ -209,3 +209,11 @@
   action: command oc expose service spring-boot-hello
   tags: examples
 
+- name: Copy build pipeline for assembling news aggregator
+  copy: src="news-aggregator-pipeline.yaml" dest="."
+  tags: pipeline
+
+- name: Create build pipeline
+  action: command oc create -f news-aggregator-pipeline.yaml
+  tags: pipeline
+
