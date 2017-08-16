@@ -1,0 +1,12 @@
+---
+
+- name: create new partition
+  parted:
+    device: /dev/sdb
+    number: 1
+    state: present
+
+- name: create new filesystem
+  filesystem:
+    fstype: ext2
+    dev: /dev/sdb1

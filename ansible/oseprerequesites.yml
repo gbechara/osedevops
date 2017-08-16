@@ -21,3 +21,8 @@
   roles:
     - nfsserver
 
+- hosts: nodes
+  user: root
+
+  roles:
+    - glusterstorage

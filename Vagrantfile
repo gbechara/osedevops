@@ -16,6 +16,8 @@ Vagrant.configure(2) do |config|
 
 #  config.vm.synced_folder "ansible", "/vagrant/ansible", owner: 'vagrant', group: 'vagrant', mount_options: ['dmode=755', 'fmode=664', 'context=system_u:object_r:virt_use_nfs:s0']
 
+# second disk for CNS
+    disk = 'secondDisk.vmdk'
   
   config.vm.define "ose-utils" do |d|
     d.vm.box = "rhel72-server-base.box"
@@ -36,6 +38,13 @@ Vagrant.configure(2) do |config|
       d.vm.box = "rhel72-server-base.box"
       d.vm.hostname = "ose-node-#{i}.example.com"
       d.vm.network "private_network", ip: "10.100.192.20#{i+1}", auto_config: true
+# additional disk for CNS
+      d.vm.provider "virtualbox" do |vb|
+        unless File.exist?(disk)
+          vb.customize ['createhd', '--filename', disk, '--size', 50 * 1024]
+          vb.customize ['storageattach', :id, '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', disk]
+        end
+      end
       d.vm.provider "virtualbox" do |v|
 # will depend on the application deployed on the nodes
 #        v.memory = 2048

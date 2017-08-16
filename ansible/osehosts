@@ -2,6 +2,7 @@
 [OSEv3:children]
 masters
 nodes
+glusterfs
 
 # Set variables common for all OSEv3 hosts
 [OSEv3:vars]
@@ -16,6 +17,9 @@ deployment_type=openshift-enterprise
 # uncomment the following to enable htpasswd authentication; defaults to DenyAllPasswordIdentityProvider
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
 
+
+openshift_disable_check=memory_availability,disk_availability,docker_storage
+
 # host group for masters
 [masters]
 ose-master.example.com
@@ -26,3 +30,6 @@ ose-master.example.com openshift_node_labels="{'region': 'infra', 'zone': 'maste
 ose-node-1.example.com openshift_node_labels="{'region': 'primary', 'zone': 'dev'}" openshift_ip=10.100.192.202
 #ose-node-2.example.com openshift_node_labels="{'region': 'primary', 'zone': 'test'}" openshift_ip=10.100.192.203
 #ose-node-3.example.com openshift_node_labels="{'region': 'primary', 'zone': 'prod'}" openshift_ip=10.100.192.204
+
+[glusterfs]
+ose-node-1.example.com glusterfs_ip=10.100.192.202 glusterfs_devices='[ "/dev/sdb1" ]'
