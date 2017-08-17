@@ -37,8 +37,8 @@ Vagrant.configure(2) do |config|
       d.vm.network "private_network", ip: "10.100.192.20#{i+1}", auto_config: true
       d.vm.provider "virtualbox" do |v|
 # will depend on the application deployed on the nodes
-        v.memory = 2048
-#        v.memory = 3072
+#        v.memory = 2048
+         v.memory = 3072
 #        v.memory = 4086
 #         v.memory = 5120
 #        v.memory = 6144
