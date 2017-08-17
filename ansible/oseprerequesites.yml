@@ -21,7 +21,7 @@
   roles:
     - nfsserver
 
-- hosts: nodes
+- hosts: gluster-servers
   user: root
 
   roles:

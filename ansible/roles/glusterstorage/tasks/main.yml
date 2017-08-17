@@ -6,7 +6,8 @@
     number: 1
     state: present
 
-- name: create new filesystem
-  filesystem:
-    fstype: ext2
-    dev: /dev/sdb1
+# Each device must be bare, with no partitions or LVM PVs. Set glusterfs_ip to the IP address that will be used by pods to communicate with the GlusterFS node.
+#- name: create new filesystem
+#  filesystem:
+#    fstype: ext2
+#    dev: /dev/sdb1
