@@ -23,13 +23,6 @@ Vagrant.configure(2) do |config|
     d.vm.box = "rhel72-server-base.box"
     d.vm.hostname = "ose-utils.example.com"
     d.vm.network "private_network", ip: "10.100.192.201", auto_config: true
-# additional disk for CNS
-    d.vm.provider "virtualbox" do |vb|
-      unless File.exist?(disk)
-        vb.customize ['createhd', '--filename', disk, '--size', 50 * 1024]
-        vb.customize ['storageattach', :id, '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', disk]
-      end
-    end
     d.vm.provider "virtualbox" do |v|
 # minimum 3 Go, more if adding other containers such as CloudForms/ManageIQ admin console
       v.memory = 3072
@@ -55,6 +48,10 @@ Vagrant.configure(2) do |config|
 #        v.memory = 8224
 #        v.memory = 10240
         v.cpus = 2
+        unless File.exist?(disk)
+          v.customize ['createhd', '--filename', disk, '--size', 50 * 1024]
+          v.customize ['storageattach', :id, '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', disk]
+        end
       end
       d.vm.provider :"virtualbox" do |vb|
         vb.gui = true

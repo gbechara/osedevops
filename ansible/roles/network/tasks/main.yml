@@ -2,8 +2,8 @@
 - name: Setup networking interfaces
   action: template owner=root group=root mode=644 src=etc/sysconfig/network-scripts/ifcfg-enp0s8 dest=/etc/sysconfig/network-scripts/ifcfg-enp0s8
 
-- name: Setup networking interfaces disable NM for enp0s3
-  lineinfile: "dest=/etc/sysconfig/network-scripts/ifcfg-enp0s3 state=present insertafter='NAME=' line='NM_CONTROLLED=no'"
+#- name: Setup networking interfaces disable NM for enp0s3
+#  lineinfile: "dest=/etc/sysconfig/network-scripts/ifcfg-enp0s3 state=present insertafter='NAME=' line='NM_CONTROLLED=no'"
 
 # to overcome vagrant that can add its config into enp0s3
 #- name: Chattr -i /etc/sysconfig/network-scripts/ifcfg-enp0s3 Vagrant workaround

@@ -1,6 +1,7 @@
 TYPE="Ethernet"
 BOOTPROTO="none"
-NM_CONTROLLED=no
+#https://bugzilla.redhat.com/show_bug.cgi?id=1474707
+NM_CONTROLLED=yes
 DEFROUTE="yes"
 #NETWORK=10.100.192.0
 NETMASK=255.255.255.0
