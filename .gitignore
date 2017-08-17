@@ -22,6 +22,7 @@
 *.box
 *.retry
 *.rpm
+*.vmdk
 
 # Logs and databases #
 ######################
