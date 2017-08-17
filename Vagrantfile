@@ -16,9 +16,6 @@ Vagrant.configure(2) do |config|
 
 #  config.vm.synced_folder "ansible", "/vagrant/ansible", owner: 'vagrant', group: 'vagrant', mount_options: ['dmode=755', 'fmode=664', 'context=system_u:object_r:virt_use_nfs:s0']
 
-# second disk for CNS
-    disk = 'secondDisk.vmdk'
-  
   config.vm.define "ose-utils" do |d|
     d.vm.box = "rhel72-server-base.box"
     d.vm.hostname = "ose-utils.example.com"
@@ -33,21 +30,26 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  (1..1).each do |i|
+  (1..3).each do |i|
     config.vm.define "ose-node-#{i}" do |d|
       d.vm.box = "rhel72-server-base.box"
       d.vm.hostname = "ose-node-#{i}.example.com"
       d.vm.network "private_network", ip: "10.100.192.20#{i+1}", auto_config: true
       d.vm.provider "virtualbox" do |v|
 # will depend on the application deployed on the nodes
-#        v.memory = 2048
+        v.memory = 2048
 #        v.memory = 3072
-        v.memory = 4086
+#        v.memory = 4086
 #         v.memory = 5120
 #        v.memory = 6144
 #        v.memory = 8224
 #        v.memory = 10240
+         if i != 1
+           v.memory = 1024
+         end
         v.cpus = 2
+# second disk for CNS
+        disk = "gluster-storage-#{i}.vmdk"
         unless File.exist?(disk)
           v.customize ['createhd', '--filename', disk, '--size', 50 * 1024]
           v.customize ['storageattach', :id, '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', disk]

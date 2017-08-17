@@ -20,7 +20,9 @@ ssh-keygen -t rsa -f ~/.ssh/id_rsa -N ''
 
 for host in 10.100.192.200 \
 10.100.192.201 \
-10.100.192.202; \
+10.100.192.202 \
+10.100.192.203 \
+10.100.192.204; \
 do sshpass -p "weareawesome" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub $host; \
 done
 
@@ -31,7 +33,9 @@ ansible-playbook /vagrant/ansible/oseprerequesites.yml -i /vagrant/ansible/hosts
 
 for host in ose-master.example.com \
 ose-utils.example.com \
-ose-node-1.example.com; \
+ose-node-1.example.com \
+ose-node-2.example.com \
+ose-node-3.example.com; \
 do sshpass -p "weareawesome" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub $host; \
 done
 
