@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
 #        v.memory = 10240
         v.cpus = 2
         if i != 1
-          v.cpus = 1
+          v.cpus = 2
           v.memory = 512
         end
 # second disk for CNS
