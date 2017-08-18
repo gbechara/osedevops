@@ -173,47 +173,51 @@
 #  action: command oc expose svc eap-app
 #  tags: examples
 
-- name: Git Lab create news-aggregator project and import sample
-  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=news-aggregator&public=true&import_url=https://github.com/gbechara/osedevops-news-aggregator.git"'
-  tags: examples
+########################################################
+# New agregeator micro-services demo
+########################################################
 
-- name: Create an news-aggregator in development
-  action: command oc login -u dev1 -p dev1
-  tags: examples
+#- name: Git Lab create news-aggregator project and import sample
+#  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=news-aggregator&public=true&import_url=https://github.com/gbechara/osedevops-news-aggregator.git"'
+#  tags: examples
 
-- name: Create news-aggregator project
-  action: command oc new-project news-aggregator
-  tags: examples
+#- name: Create an news-aggregator in development
+#  action: command oc login -u dev1 -p dev1
+#  tags: examples
 
-- name: Create aggregator application
-  action: command oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name aggregator --context-dir=aggregator
-  tags: examples
+#- name: Create news-aggregator project
+#  action: command oc new-project news-aggregator
+#  tags: examples
 
-- name: Expose aggregator application
-  action: command oc expose service aggregator
-  tags: examples
+#- name: Create aggregator application
+#  action: command oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name aggregator --context-dir=aggregator
+#  tags: examples
 
-- name: Create a article application
-  action: command oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name articles --context-dir=articles
-  tags: examples
+#- name: Expose aggregator application
+#  action: command oc expose service aggregator
+#  tags: examples
 
-- name: Expose articles application
-  action: command oc expose service articles
-  tags: examples
+#- name: Create a article application
+#  action: command oc new-app openshift/php:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name articles --context-dir=articles
+#  tags: examples
 
-- name: Expose spring-boot-hello application
-  action: command oc new-app openshift/redhat-openjdk18-openshift:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name spring-boot-hello --context-dir=spring-boot-hello
-  tags: examples
+#- name: Expose articles application
+#  action: command oc expose service articles
+#  tags: examples
 
-- name: Expose spring-boot-hello application
-  action: command oc expose service spring-boot-hello
-  tags: examples
+#- name: Expose spring-boot-hello application
+#  action: command oc new-app openshift/redhat-openjdk18-openshift:latest~http://gabriel@gitlab.example.com/gabriel/news-aggregator.git --name spring-boot-hello --context-dir=spring-boot-hello
+#  tags: examples
 
-- name: Copy build pipeline for assembling news aggregator
-  copy: src="news-aggregator-pipeline.yaml" dest="."
-  tags: pipeline
+#- name: Expose spring-boot-hello application
+#  action: command oc expose service spring-boot-hello
+#  tags: examples
 
-- name: Create build pipeline
-  action: command oc create -f news-aggregator-pipeline.yaml
-  tags: pipeline
+#- name: Copy build pipeline for assembling news aggregator
+#  copy: src="news-aggregator-pipeline.yaml" dest="."
+#  tags: pipeline
+
+#- name: Create build pipeline
+#  action: command oc create -f news-aggregator-pipeline.yaml
+#  tags: pipeline
 
