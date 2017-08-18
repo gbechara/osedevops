@@ -47,7 +47,7 @@ Vagrant.configure(2) do |config|
         v.cpus = 2
         if i != 1
           v.cpus = 2
-          v.memory = 512
+          v.memory = 1024
         end
 # second disk for CNS
         disk = "gluster-storage-#{i}.vmdk"
