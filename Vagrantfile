@@ -38,16 +38,17 @@ Vagrant.configure(2) do |config|
       d.vm.provider "virtualbox" do |v|
 # will depend on the application deployed on the nodes
 #        v.memory = 2048
-         v.memory = 3072
-#        v.memory = 4086
+#         v.memory = 3072
+        v.memory = 4086
 #         v.memory = 5120
 #        v.memory = 6144
 #        v.memory = 8224
 #        v.memory = 10240
-         if i != 1
-           v.memory = 1024
-         end
         v.cpus = 2
+        if i != 1
+          v.cpus = 1
+          v.memory = 512
+        end
 # second disk for CNS
         disk = "gluster-storage-#{i}.vmdk"
         unless File.exist?(disk)
