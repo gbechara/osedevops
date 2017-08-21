@@ -1,16 +1,29 @@
 ---
 - name: Setup networking interfaces
+  tags: networking
   action: template owner=root group=root mode=644 src=etc/sysconfig/network-scripts/ifcfg-enp0s8 dest=/etc/sysconfig/network-scripts/ifcfg-enp0s8
 
+# In OCP 3.6 installer having one interface w/o NM_CONTROLLED will impact DNSmasq config on each node
 #- name: Setup networking interfaces disable NM for enp0s3
+#  tags: networking
 #  lineinfile: "dest=/etc/sysconfig/network-scripts/ifcfg-enp0s3 state=present insertafter='NAME=' line='NM_CONTROLLED=no'"
+
+#- name: Setup networking interfaces disable NM for enp0s3
+#  tags: networking
+# lineinfile: "dest=/etc/sysconfig/network-scripts/ifcfg-enp0s3 state=present insertafter='NAME=' line='ONBOOT=no'"
+
+#- name: Stop interfaces
+#  tags: networking
+#  service: name=network state=stopped arg=enp0s3
+
 
 # to overcome vagrant that can add its config into enp0s3
 #- name: Chattr -i /etc/sysconfig/network-scripts/ifcfg-enp0s3 Vagrant workaround
 #  action: command chattr +i /etc/sysconfig/network-scripts/ifcfg-enp0s3
 
+# Not needed anymore in OCP 3.6 ??
 - name: Chattr -i /etc/resolv.conf
-  action: command chattr -i /etc/resolv.conf 
+  action: command chattr -i /etc/resolv.conf
 
 - name: Setup hosts
   action: template owner=root group=root mode=644 src=etc/hosts dest=/etc/hosts

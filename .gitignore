@@ -23,6 +23,7 @@
 *.retry
 *.rpm
 *.vmdk
+*.save
 
 # Logs and databases #
 ######################

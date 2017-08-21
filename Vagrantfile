@@ -30,7 +30,9 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  (1..3).each do |i|
+# 3 nodes are needed for CNS installation, for demos you may then launch ose-utils, ose-node-1 and ose-master
+# example: vagrant resume ose-utils ose-node-1 ose-master
+  (1..1).each do |i|
     config.vm.define "ose-node-#{i}" do |d|
       d.vm.box = "rhel72-server-base.box"
       d.vm.hostname = "ose-node-#{i}.example.com"
@@ -38,9 +40,9 @@ Vagrant.configure(2) do |config|
       d.vm.provider "virtualbox" do |v|
 # will depend on the application deployed on the nodes
 #        v.memory = 2048
-#         v.memory = 3072
+#        v.memory = 3072
         v.memory = 4086
-#         v.memory = 5120
+#        v.memory = 5120
 #        v.memory = 6144
 #        v.memory = 8224
 #        v.memory = 10240
