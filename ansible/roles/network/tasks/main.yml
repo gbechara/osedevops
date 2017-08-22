@@ -3,7 +3,8 @@
   tags: networking
   action: template owner=root group=root mode=644 src=etc/sysconfig/network-scripts/ifcfg-enp0s8 dest=/etc/sysconfig/network-scripts/ifcfg-enp0s8
 
-# In OCP 3.6 installer having one interface w/o NM_CONTROLLED will impact DNSmasq config on each node
+# Commenting this line : it seems that in OCP 3.6 installer having one interface NM_CONTROLLED="no" will impact DNSmasq config on each node, resolv.conf in /etc/origin/node is not created
+# https://bugzilla.redhat.com/show_bug.cgi?id=1474707
 #- name: Setup networking interfaces disable NM for enp0s3
 #  tags: networking
 #  lineinfile: "dest=/etc/sysconfig/network-scripts/ifcfg-enp0s3 state=present insertafter='NAME=' line='NM_CONTROLLED=no'"

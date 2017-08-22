@@ -1,7 +1,9 @@
 TYPE="Ethernet"
 BOOTPROTO="none"
 #https://bugzilla.redhat.com/show_bug.cgi?id=1474707
+# OCP3.6 NetWorkManager is used to get network params including DNS name, using resolv.conf with 
 NM_CONTROLLED=yes
+DNS1=10.100.192.201
 DEFROUTE="yes"
 #NETWORK=10.100.192.0
 NETMASK=255.255.255.0
