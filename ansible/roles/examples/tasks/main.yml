@@ -145,7 +145,7 @@
 #  tags: examples
 
 - name: Wait until the Java app is deployed
-  command: curl --head --silent http://eap-app-development.router.default.svc.cluster.local/
+  command: curl --head --silent http://eap-app-development.cloudapps.example.com/
   register: result
   until: result.stdout.find("200 OK") != -1
   retries: 128

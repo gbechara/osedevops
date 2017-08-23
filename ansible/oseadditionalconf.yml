@@ -18,7 +18,8 @@
 # registry and router are now created by installer on node region=infra (3.2.1.9-1-g2265530)
 #  - registry
 #  - router
-  - metrics
+# metrics are deployed using openshift_hosted_metrics_deploy=true since 3.3
+#  - metrics
   - examples
   - jenkins
 
