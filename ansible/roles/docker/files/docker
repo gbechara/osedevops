@@ -2,6 +2,7 @@
 
 # Modify these options if you want to change the way the docker daemon runs
 OPTIONS='--insecure-registry=172.30.0.0/16 --selinux-enabled -H unix://var/run/docker.sock -H tcp://0.0.0.0:2375  '
+#OPTIONS=' --selinux-enabled  --insecure-registry=172.30.0.0/16 --log-driver=journald'
 
 DOCKER_CERT_PATH=/etc/docker
 

@@ -5,3 +5,7 @@
   with_fileglob:
   - ./pv*.json
   tags: persistent-volumes
+
+- name: Add missing SA in 3.6 for Gluster, remove when patched
+  action: command  oc create -f clustersa.yaml -n openshift-infra
+  tags: persistent-volumes
