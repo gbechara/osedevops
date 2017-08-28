@@ -26,3 +26,10 @@
 
   roles:
     - glusterstorage
+
+- host: master
+  user: root
+
+  roles:
+    - patchinstaller
+

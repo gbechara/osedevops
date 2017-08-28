@@ -1,0 +1,4 @@
+
+- name: Add missing SA in 3.6 for Gluster, remove when patched
+  copy: src="origin-dns.conf.j2" dest="/usr/share/ansible/openshift-ansible/roles/openshift_node_dnsmasq/templates/"
+  tags: patchinstaller
