@@ -27,7 +27,8 @@ openshift_disable_check=memory_availability,disk_availability,docker_storage
 #openshift_set_hostname=True
 
 #OCP 3.6 need use openshift_dns_ip since with vagrant/vbox we have 2 interfaces with DNS enp0s8 and enp0s3 and it seems that in OCP 3.6 installer having one interface NM_CONTROLLED="no" will impact DNSmasq config on each node so both interfaces need to have NM_CONTROLLED=yes
-openshift_dns_ip=10.100.192.201
+#openshift_dns_ip=10.100.192.201
+openshift_dns_ip=172.30.0.1
 # Starting in 3.6 openshift_use_dnsmasq must be true
 #openshift_use_dnsmasq=false
 
