@@ -27,7 +27,8 @@
   roles:
     - glusterstorage
 
-- host: master
+#https://bugzilla.redhat.com/show_bug.cgi?id=1481366
+- hosts: master
   user: root
 
   roles:
