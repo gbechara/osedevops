@@ -23,8 +23,8 @@
 #  action: command chattr +i /etc/sysconfig/network-scripts/ifcfg-enp0s3
 
 # Not needed anymore in OCP 3.6 ??
-#- name: Chattr -i /etc/resolv.conf
-#  action: command chattr -i /etc/resolv.conf
+- name: Chattr -i /etc/resolv.conf
+  action: command chattr -i /etc/resolv.conf
 
 - name: Setup hosts
   action: template owner=root group=root mode=644 src=etc/hosts dest=/etc/hosts

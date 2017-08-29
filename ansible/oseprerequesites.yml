@@ -28,6 +28,7 @@
     - glusterstorage
 
 #https://bugzilla.redhat.com/show_bug.cgi?id=1481366
+#due to VirtualBox enp0s3 on ip address 10.0.2.15
 - hosts: master
   user: root
 

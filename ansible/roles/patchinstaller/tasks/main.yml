@@ -1,6 +1,6 @@
 
 #https://bugzilla.redhat.com/show_bug.cgi?id=1481366
-
+#due to VirtualBox enp0s3 on ip address 10.0.2.15
 - name: Correction 3.6 dnsmasd.d remove when patched
   copy: src="origin-dns.conf.j2" dest="/usr/share/ansible/openshift-ansible/roles/openshift_node_dnsmasq/templates/"
   tags: patchinstaller
