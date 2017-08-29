@@ -30,7 +30,7 @@ openshift_disable_check=memory_availability,disk_availability,docker_storage
 #https://bugzilla.redhat.com/show_bug.cgi?id=1481366
 #openshift_dns_ip=10.100.192.201
 #openshift_dns_ip=172.30.0.1
-# Starting in 3.6 openshift_use_dnsmasq must be true
+#Starting in 3.6 openshift_use_dnsmasq must be true
 #openshift_use_dnsmasq=false
 
 openshift_master_default_subdomain=cloudapps.example.com
@@ -42,6 +42,10 @@ openshift_router_selector="region=infra"
 #use_cluster_metrics=true
 #openshift_master_metrics_public_url=https://hawkular-metrics.example.com/hawkular/metrics
 
+# Configure nodeIP in the node config
+# This is needed in cases where node traffic is desired to go over an
+# interface other than the default network interface.
+# openshift_node_set_node_ip=True
 
 #Service Catalog
 #openshift_enable_service_catalog=true

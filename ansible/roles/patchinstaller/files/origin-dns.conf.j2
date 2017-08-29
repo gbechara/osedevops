@@ -4,4 +4,5 @@ no-negcache
 max-cache-ttl=1
 enable-dbus
 bind-interfaces
-listen-address={{ openshift.node.dns_ip }}
+listen-address={{ openshift_dns_ip }}
+server=/{{ openshift.common.dns_domain }}/{{ openshift.common.kube_svc_ip }}
