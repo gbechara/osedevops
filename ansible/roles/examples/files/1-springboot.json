@@ -2,21 +2,21 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "1-springboot-mongo-gluster",
+    "name": "1-springboot",
     "annotations": {
-      "openshift.io/display-name": "Springboot + MongoDB (GlusterFS)",
-      "description": "An example Springboot application with a MongoDB database on GlusterFS.",
+      "openshift.io/display-name": "Springboot ",
+      "description": "An example Springboot application that connect to a mongo db in the same project.",
       "tags": "instant-app,quickstart,springboot, java",
       "iconClass": "icon-springboot",
-      "template.openshift.io/long-description": "This template defines resources needed to develop a springboot application, including a build configuration, application deployment configuration, and database deployment configuration.",
+      "template.openshift.io/long-description": "This template defines resources needed to develop a springboot application, including a build configuration, application deployment configuration.",
       "template.openshift.io/provider-display-name": "gabs",
       "template.openshift.io/documentation-url": "https://github.com/openshift/springboot-ex",
       "template.openshift.io/support-url": "https://access.redhat.com"
     }
   },
-  "message": "The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/openshift/springboot-ex/blob/master/README.md.",
+  "message": "The following service(s) have been created in your project: ${NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/openshift/springboot-ex/blob/master/README.md.",
   "labels": {
-    "template": "1-springboot-mongo-gluster"
+    "template": "1-springboot"
   },
   "objects": [
     {
@@ -156,7 +156,7 @@
             "imageChangeParams": {
               "automatic": true,
               "containerNames": [
-                "1-springboot-mongo-gluster"
+                "1-springboot"
               ],
               "from": {
                 "kind": "ImageStreamTag",
@@ -182,7 +182,7 @@
           "spec": {
             "containers": [
               {
-                "name": "1-springboot-mongo-gluster",
+                "name": "1-springboot",
                 "image": " ",
                 "ports": [
                   {
@@ -240,179 +240,6 @@
           }
         }
       }
-    },
-    {
-      "kind": "PersistentVolumeClaim",
-      "apiVersion": "v1",
-      "metadata": {
-        "annotations": {
-          "volume.beta.kubernetes.io/storage-class": "glusterfs-storage",
-          "volume.beta.kubernetes.io/storage-provisioner": "kubernetes.io/glusterfs"
-        },
-        "name": "${DATABASE_SERVICE_NAME}"
-       },
-      "spec": {
-        "accessModes": [
-          "ReadWriteOnce"
-        ],
-        "resources": {
-          "requests": {
-            "storage": "${VOLUME_CAPACITY}"
-          }
-        }
-      }
-    },
-    {
-      "kind": "Service",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "${DATABASE_SERVICE_NAME}",
-        "annotations": {
-          "description": "Exposes the database server"
-        }
-      },
-      "spec": {
-        "ports": [
-          {
-            "name": "mongodb",
-            "port": 27017,
-            "targetPort": 27017
-          }
-        ],
-        "selector": {
-          "name": "${DATABASE_SERVICE_NAME}"
-        }
-      }
-    },
-    {
-      "kind": "DeploymentConfig",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "${DATABASE_SERVICE_NAME}",
-        "annotations": {
-          "description": "Defines how to deploy the database"
-        }
-      },
-      "spec": {
-        "strategy": {
-          "type": "Recreate"
-        },
-        "triggers": [
-          {
-            "type": "ImageChange",
-            "imageChangeParams": {
-              "automatic": true,
-              "containerNames": [
-                "mongodb"
-              ],
-              "from": {
-                "kind": "ImageStreamTag",
-                "namespace": "${NAMESPACE}",
-                "name": "mongodb:3.2"
-              }
-            }
-          },
-          {
-            "type": "ConfigChange"
-          }
-        ],
-        "replicas": 1,
-        "selector": {
-          "name": "${DATABASE_SERVICE_NAME}"
-        },
-        "template": {
-          "metadata": {
-            "name": "${DATABASE_SERVICE_NAME}",
-            "labels": {
-              "name": "${DATABASE_SERVICE_NAME}"
-            }
-          },
-          "spec": {
-            "containers": [
-              {
-                "name": "mongodb",
-                "image": " ",
-                "ports": [
-                  {
-                    "containerPort": 27017
-                  }
-                ],
-                "env": [
-                  {
-                    "name": "MONGODB_USER",
-                    "valueFrom": {
-                      "secretKeyRef" : {
-                        "name" : "${NAME}",
-                        "key" : "database-user"
-                      }
-                    }
-                  },
-                  {
-                    "name": "MONGODB_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef" : {
-                        "name" : "${NAME}",
-                        "key" : "database-password"
-                      }
-                    }
-                  },
-                  {
-                    "name": "MONGODB_DATABASE",
-                    "value": "${DATABASE_NAME}"
-                  },
-                  {
-                    "name": "MONGODB_ADMIN_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef" : {
-                        "name" : "${NAME}",
-                        "key" : "database-admin-password"
-                      }
-                    }
-                  }
-                ],
-                "readinessProbe": {
-                  "timeoutSeconds": 1,
-                  "initialDelaySeconds": 3,
-                  "exec": {
-                    "command": [
-                      "/bin/sh",
-                      "-i",
-                      "-c",
-                      "mongo 127.0.0.1:27017/$MONGODB_DATABASE -u $MONGODB_USER -p $MONGODB_PASSWORD --eval=\"quit()\""
-                    ]
-                  }
-                },
-                "livenessProbe": {
-                  "timeoutSeconds": 1,
-                  "initialDelaySeconds": 30,
-                  "tcpSocket": {
-                    "port": 27017
-                  }
-                },
-                "resources": {
-                  "limits": {
-                    "memory": "${MEMORY_MONGODB_LIMIT}"
-                  }
-                },
-                "volumeMounts": [
-                  {
-                    "name": "${DATABASE_SERVICE_NAME}-data",
-                    "mountPath": "/var/lib/mongodb/data"
-                  }
-                ]
-              }
-            ],
-            "volumes": [
-              {
-                "name": "${DATABASE_SERVICE_NAME}-data",
-                "persistentVolumeClaim": {
-                  "claimName": "${DATABASE_SERVICE_NAME}"
-                }
-              }
-            ]
-          }
-        }
-      }
     }
   ],
   "parameters": [
@@ -421,7 +248,7 @@
       "displayName": "Name",
       "description": "The name assigned to all of the frontend objects defined in this template.",
       "required": true,
-      "value": "springboot-mongo-gluster"
+      "value": "springboot"
     },
     {
       "name": "NAMESPACE",
@@ -456,7 +283,7 @@
       "displayName": "Git Repository URL",
       "description": "The URL of the repository with your application source code.",
       "required": true,
-      "value": "http://ose-utils.example.com/gabriel//osedevops-springbootmongo.git"
+      "value": "https://github.com/gbechara/osedevops-springbootmongo.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",

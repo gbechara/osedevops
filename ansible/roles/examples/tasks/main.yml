@@ -221,3 +221,38 @@
 #  action: command oc create -f news-aggregator-pipeline.yaml
 #  tags: pipeline
 
+
+##########################################################################
+# springboot micro-services demo with Mongo on Gluster, Jaeger and Hystrix
+##########################################################################
+
+- name: Git Lab create spring-boot project and import sample
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=osedevops-springbootmongo&public=true&import_url=https://github.com/gbechara/osedevops-springbootmongo.git"'
+  tags: examples-msa
+
+- name: Create an springbootdemo in development
+  action: command oc login -u dev1 -p dev1
+  tags: examples-msa
+
+- name: Create springbootdemo project
+  action: command oc new-project springbootdemo
+  tags: examples-msa
+
+- name: Create a springbootdemo application in development
+  action: command oc new-app --template=1-springboot-mongo-gluster
+  tags: examples-msa
+
+- name: Create a hystrix-dashboard
+  action: command oc create -f http://repo1.maven.org/maven2/io/fabric8/kubeflix/hystrix-dashboard/1.0.28/hystrix-dashboard-1.0.28-openshift.yml
+  tags: examples-msa
+
+- name: Expose the hystrix-dashboard
+  action: command oc oc expose service hystrix-dashboard --port=8080
+  tags: examples-msa
+
+- name: Create and exposet a jaeger-dashboard
+  action: command oc oc process -f https://raw.githubusercontent.com/jaegertracing/jaeger-openshift/master/all-in-one/jaeger-all-in-one-template.yml | oc create -f -
+  tags: examples-msa
+
+
+
