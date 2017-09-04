@@ -247,11 +247,11 @@
   tags: examples-msa
 
 - name: Expose the hystrix-dashboard
-  action: command oc oc expose service hystrix-dashboard --port=8080
+  action: command oc expose service hystrix-dashboard --port=8080
   tags: examples-msa
 
 - name: Create and exposet a jaeger-dashboard
-  action: command oc oc process -f https://raw.githubusercontent.com/jaegertracing/jaeger-openshift/master/all-in-one/jaeger-all-in-one-template.yml | oc create -f -
+  action: command oc process -f https://raw.githubusercontent.com/jaegertracing/jaeger-openshift/master/all-in-one/jaeger-all-in-one-template.yml | oc create -f -
   tags: examples-msa
 
 
