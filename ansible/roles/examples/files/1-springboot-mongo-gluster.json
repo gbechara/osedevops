@@ -106,7 +106,13 @@
               "kind": "ImageStreamTag",
               "namespace": "${NAMESPACE}",
               "name": "redhat-openjdk18-openshift:1.1"
-            }
+              },
+              "env": [
+                      {
+                      "name": "MAVEN_MIRROR_URL",
+                      "value": "http://ose-utils.example.com:8081/nexus/content/groups/jboss-group/"
+                      }
+             ]
           }
         },
         "output": {

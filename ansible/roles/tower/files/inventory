@@ -1,0 +1,32 @@
+# If port need to be changed look into selinus settings
+# setcap cap_net_bind_service=+ep /usr/sbin/nginx
+# sudo semanage port -l | grep http_port_t
+
+[tower]
+ose-master.example.com
+
+[database]
+
+[all:vars]
+admin_password='weareawesome'
+
+pg_host=''
+pg_port=''
+
+pg_database='awx'
+pg_username='awx'
+pg_password='weareawesome'
+
+rabbitmq_port=5672
+rabbitmq_vhost=tower
+rabbitmq_username=tower
+rabbitmq_password='weareawesome'
+rabbitmq_cookie=rabbitmqcookie
+
+# Needs to be true for fqdns and ip addresses
+rabbitmq_use_long_name=true
+# Needs to remain false if you are using localhost
+
+http_port=81
+#https_port=553
+disable_https=true

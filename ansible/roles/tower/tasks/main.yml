@@ -1,0 +1,26 @@
+
+- name: Add adequate EPEL repos
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+  tags: tower
+
+- name: Get Ansible Installer
+  get_url:
+    url: https://releases.ansible.com/awx/setup/ansible-tower-setup-latest.tar.gz
+    dest: .
+  tags: tower
+
+- name: Extract Ansible Installer
+  unarchive:
+    src: ~/ansible-tower-setup-latest.tar.gz
+    dest: .
+  tags: tower
+
+- name: Copy Ansible Inventory File
+  copy: src="inventory" dest="./ansible-tower-setup-3.1.4"
+  tags: tower
+
+- name: Run Tower Installer
+  shell: ./ansible-tower-setup-3.1.4/setup.sh
+  tags: tower
