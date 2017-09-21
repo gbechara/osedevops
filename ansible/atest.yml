@@ -1,6 +1,6 @@
 ---
 
-- hosts: master
+- hosts: utils
   user: root
 
   roles:

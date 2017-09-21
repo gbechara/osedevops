@@ -3,7 +3,7 @@
 # sudo semanage port -l | grep http_port_t
 
 [tower]
-ose-master.example.com
+ose-utils.example.com
 
 [database]
 

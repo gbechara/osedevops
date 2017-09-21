@@ -1,4 +1,4 @@
-
+---
 - name: Add adequate EPEL repos
   yum:
     name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -7,20 +7,32 @@
 
 - name: Get Ansible Installer
   get_url:
-    url: https://releases.ansible.com/awx/setup/ansible-tower-setup-latest.tar.gz
+    url: https://releases.ansible.com/awx/setup/ansible-tower-setup-3.1.5.tar.gz
     dest: .
   tags: tower
 
 - name: Extract Ansible Installer
   unarchive:
-    src: ~/ansible-tower-setup-latest.tar.gz
+    src: ~/ansible-tower-setup-3.1.5.tar.gz
     dest: .
   tags: tower
 
 - name: Copy Ansible Inventory File
-  copy: src="inventory" dest="./ansible-tower-setup-3.1.4"
+  copy: src="inventory" dest="./ansible-tower-setup-3.1.5"
   tags: tower
 
 - name: Run Tower Installer
-  shell: ./ansible-tower-setup-3.1.4/setup.sh
+  shell: ./ansible-tower-setup-3.1.5/setup.sh
+  tags: tower
+
+- name: Create ssh key for bootstrappring ansible on utils
+  shell: 'ssh-keygen -t rsa -f ~/.ssh/id_rsa_utils -N ""'
+  tags: tower
+
+#- name: Distribute ssh keys
+#  shell: 'for host in 10.100.192.200 10.100.192.201 10.100.192.202 10.100.192.203 10.100.192.204; do sshpass -p "weareawesome" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_utils.pub $host; done'
+#  tags: tower
+
+- name: Distribute ssh keys
+  shell: 'for host in ose-master.example.com ose-utils.example.com ose-node-1.example.com ose-node-2.example.com ose-node-3.example.com; do sshpass -p "weareawesome" ssh-copy-id -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa_utils.pub $host; done'
   tags: tower
