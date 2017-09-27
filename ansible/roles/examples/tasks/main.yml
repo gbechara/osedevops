@@ -242,6 +242,22 @@
   action: command oc new-app --template=1-springboot-mongo-gluster
   tags: examples-msa
 
+- name: Copy Config Map File
+  action: template src=application.yml dest=.
+  tags: example-msa
+
+- name: Create turbine server config map
+  action: command oc create configmap turbine-server --from-file=application.yml -n springbootdemo
+  tags: example-msa
+
+- name: Create a turbine-server
+  action: command oc create -f http://repo1.maven.org/maven2/io/fabric8/kubeflix/turbine-server/1.0.28/turbine-server-1.0.28-openshift.yml
+  tags: example-msa
+
+- name: Add admin role to turbine-server sa
+  action: command oc policy add-role-to-user admin system:serviceaccount:springbootdemo:turbine
+  tags: example-msa
+
 - name: Create a hystrix-dashboard
   action: command oc create -f http://repo1.maven.org/maven2/io/fabric8/kubeflix/hystrix-dashboard/1.0.28/hystrix-dashboard-1.0.28-openshift.yml
   tags: examples-msa
