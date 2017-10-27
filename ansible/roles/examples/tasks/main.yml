@@ -271,4 +271,12 @@
   tags: examples-msa
 
 
+##########################################################################
+# tower example script
+##########################################################################
+
+- name: Git Lab create spring-boot project and import sample
+  shell: 'curl --header "PRIVATE-TOKEN: `cat token.txt`" "http://gitlab.example.com/api/v3/projects/user/2" --data "name=osedevops-tower&public=true&import_url=https://github.com/gbechara/osedevops-tower.git"'
+  tags: examples-tower
+
 

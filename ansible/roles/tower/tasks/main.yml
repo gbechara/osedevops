@@ -7,22 +7,22 @@
 
 - name: Get Ansible Installer
   get_url:
-    url: https://releases.ansible.com/awx/setup/ansible-tower-setup-3.1.5.tar.gz
+    url: https://releases.ansible.com/awx/setup/ansible-tower-setup-3.2.1.tar.gz
     dest: .
   tags: tower
 
 - name: Extract Ansible Installer
   unarchive:
-    src: ~/ansible-tower-setup-3.1.5.tar.gz
+    src: ~/ansible-tower-setup-3.2.1.tar.gz
     dest: .
   tags: tower
 
 - name: Copy Ansible Inventory File
-  copy: src="inventory" dest="./ansible-tower-setup-3.1.5"
+  copy: src="inventory" dest="./ansible-tower-setup-3.2.1"
   tags: tower
 
 - name: Run Tower Installer
-  shell: ./ansible-tower-setup-3.1.5/setup.sh
+  shell: ./ansible-tower-setup-3.2.1/setup.sh
   tags: tower
 
 - name: Create ssh key for bootstrappring ansible on utils
