@@ -5,10 +5,18 @@
   copy: src="origin-dns.conf.j2" dest="/usr/share/ansible/openshift-ansible/roles/openshift_node_dnsmasq/templates/"
   tags: patchinstaller
 
-- name: Correction 3.6 related to dnsmasd.d remove when patched
+- name: Correction 3.6 related to dnsmasd.d behaviour on Vagrant
   copy: src="origin-upstream-dns.conf" dest="/etc/dnsmasq.d"
   tags: patchinstaller
 
-- name: Correction 3.6 related to dnsmasd.d remove when patched
+- name: Correction 3.6 related to dnsmasd.d behaviour on Vagrant
   action: command chattr +i /etc/dnsmasq.d/origin-upstream-dns.conf
+  tags: patchinstaller
+
+- name: Correction to 3.7 installer as described here https://github.com/openshift/openshift-ansible/pull/6211/files remove when patched
+  copy: src="glusterblock_deploy.yml" dest="/usr/share/ansible/openshift-ansible/roles/openshift_storage_glusterfs/tasks/"
+  tags: patchinstaller
+
+- name: Correction to 3.7 installer as described here https://github.com/openshift/openshift-ansible/pull/6211/files remove when patched
+  action: command chattr +i /usr/share/ansible/openshift-ansible/roles/openshift_storage_glusterfs/tasks/glusterblock_deploy.yml
   tags: patchinstaller

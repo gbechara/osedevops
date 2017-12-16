@@ -30,9 +30,10 @@ Vagrant.configure(2) do |config|
     end
   end
 
-# 3 nodes are needed for CNS installation, for demos you may then launch ose-utils, ose-node-1 and ose-master
+# 3 nodes are needed for CNS installation, for demos you may then launch ose-utils, ose-node-1 and ose-master, when using master for CNS we will need 2 nodes
 # example: vagrant resume ose-utils ose-node-1 ose-master
-  (1..3).each do |i|
+#  (1..3).each do |i|
+  (1..2).each do |i|
     config.vm.define "ose-node-#{i}" do |d|
       d.vm.box = "rhel72-server-base.box"
       d.vm.hostname = "ose-node-#{i}.example.com"
@@ -73,6 +74,12 @@ Vagrant.configure(2) do |config|
 #        v.memory = 3072
         v.memory = 2304
         v.cpus = 2
+# second disk for CNS
+        disk = "gluster-storage-master.vmdk"
+        unless File.exist?(disk)
+          v.customize ['createhd', '--filename', disk, '--size', 50 * 1024]
+          v.customize ['storageattach', :id, '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', disk]
+        end
       end
       d.vm.provision :"shell", path: "bootstrap_ansible.sh"
 #      d.vm.provider "virtualbox" do |v|
