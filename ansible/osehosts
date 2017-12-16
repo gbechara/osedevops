@@ -2,7 +2,7 @@
 [OSEv3:children]
 masters
 nodes
-etcd
+#etcd
 glusterfs
 
 # Set variables common for all OSEv3 hosts
@@ -41,6 +41,9 @@ openshift_master_default_subdomain=cloudapps.example.com
 openshift_registry_selector="region=infra"
 openshift_router_selector="region=infra"
 
+#Running etcd as an embedded service is no longer supported. If this is a new install please define an 'etcd' group with either one or three hosts. These hosts may be the same hosts as your masters. If this is an upgrade you may set openshift_master_unsupported_embedded_etcd=true until a migration playbook becomes available.
+openshift_master_unsupported_embedded_etcd=true
+
 #openshift_hosted_metrics_deploy=true
 #use_cluster_metrics=true
 #openshift_master_metrics_public_url=https://hawkular-metrics.example.com/hawkular/metrics
@@ -58,8 +61,8 @@ openshift_router_selector="region=infra"
 [masters]
 ose-master.example.com
 
-[etcd]
-ose-master.example.com
+#[etcd]
+#ose-master.example.com
 
 # host group for nodes, includes region info
 [nodes]
