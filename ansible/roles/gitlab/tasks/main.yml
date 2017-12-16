@@ -17,7 +17,7 @@
           --volume /srv/gitlab/config:/etc/gitlab:Z \
           --volume /srv/gitlab/logs:/var/log/gitlab:Z \
           --volume /srv/gitlab/data:/var/opt/gitlab:Z \
-          gitlab/gitlab-ce:latest
+          gitlab/gitlab-ce:9.4.7-ce.0
   tags: gitlab
   ignore_errors: yes
 
