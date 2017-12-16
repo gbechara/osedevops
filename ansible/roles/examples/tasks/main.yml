@@ -12,29 +12,29 @@
   lineinfile: 'dest=/etc/origin/master/master-config.yaml state=present regexp="  projectRequestTemplate:" line="  projectRequestTemplate: "default/project-request""'
   tags: projectselector
 
-- name: Add techpreview file in master config
-  copy: src="tech-preview.js" dest="."
-  tags: techpreview
+#- name: Add techpreview file in master config
+#  copy: src="tech-preview.js" dest="."
+#  tags: techpreview
 
-- name: Add techpreview file in master config
-  lineinfile: "dest=/etc/origin/master/master-config.yaml state=present insertafter='    requestTimeoutSeconds: 0' line='  extensionScripts:'"
-  tags: techpreview
+#- name: Add techpreview file in master config
+#  lineinfile: "dest=/etc/origin/master/master-config.yaml state=present insertafter='    requestTimeoutSeconds: 0' line='  extensionScripts:'"
+#  tags: techpreview
 
-- name: Add techpreview file in master config
-  lineinfile: "dest=/etc/origin/master/master-config.yaml state=present insertafter='  extensionScripts:' line='    - /root/tech-preview.js'"
-  tags: techpreview
+#- name: Add techpreview file in master config
+#  lineinfile: "dest=/etc/origin/master/master-config.yaml state=present insertafter='  extensionScripts:' line='    - /root/tech-preview.js'"
+#  tags: techpreview
+
+#- name: Restart master
+#  service: name=atomic-openshift-master state=restarted
+#  tags: projectselector
 
 - name: Restart master
-  service: name=atomic-openshift-master state=restarted
+  service: name=atomic-openshift-master-api state=restarted
   tags: projectselector
 
-#- name: Restart master
-#  service: name=atomic-openshift-master-api state=restarted
-#  tags: projectselector
-
-#- name: Restart master
-#  service: name=atomic-openshift-master-controllers state=restarted
-#  tags: projectselector
+- name: Restart master
+  service: name=atomic-openshift-master-controllers state=restarted
+  tags: projectselector
 
 - name: Copy offine sample
   copy: src="{{ item }}" dest="/usr/share/openshift/examples/quickstart-templates/"
