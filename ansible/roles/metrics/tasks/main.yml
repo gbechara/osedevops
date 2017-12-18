@@ -1,4 +1,5 @@
 ---
+# metrics are deployed using openshift_hosted_metrics_deploy=true since 3.3
 - name: Copy the metrics service account definition
   copy: src="metrics-service-account.yaml" dest="."
   tags: hawkular-metrics

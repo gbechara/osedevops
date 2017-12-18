@@ -42,11 +42,13 @@ openshift_registry_selector="region=infra"
 openshift_router_selector="region=infra"
 
 #Running etcd as an embedded service is no longer supported. If this is a new install please define an 'etcd' group with either one or three hosts. These hosts may be the same hosts as your masters. If this is an upgrade you may set openshift_master_unsupported_embedded_etcd=true until a migration playbook becomes available.
-#openshift_master_unsupported_embedded_etcd=true
+#openshift_master_unsupported_embedded_etcd=true # not working
 
 #openshift_hosted_metrics_deploy=true
-#use_cluster_metrics=true
+# --> you might need to disable metrics for laptop demos, metrics can be deployed leater using:
+# ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/byo/openshift-cluster/openshift-metrics.yml -i /vagrant/ansible/osehosts
 #openshift_master_metrics_public_url=https://hawkular-metrics.example.com/hawkular/metrics
+#use_cluster_metrics=true # not used anymore since 3.3
 
 # Configure nodeIP in the node config
 # This is needed in cases where node traffic is desired to go over an
