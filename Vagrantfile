@@ -71,8 +71,8 @@ Vagrant.configure(2) do |config|
       d.vm.network "private_network", ip: "10.100.192.200", auto_config: true
       d.vm.provider "virtualbox" do |v|
 #        v.memory = 4096
-        v.memory = 3072
-#        v.memory = 2304
+#        v.memory = 3072
+        v.memory = 2304
         v.cpus = 2
 # second disk for CNS
         disk = "gluster-storage-master.vmdk"
